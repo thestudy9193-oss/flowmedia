@@ -298,110 +298,84 @@
     }
     .proc-banner strong em { font-style: normal; color: var(--primary); }
 
-    /* ── RESULT (bone) ─────────────── */
-    .result-grid {
+    /* ── PORTFOLIO (bone) ────────────── */
+    .port-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 14px;
+    }
+    .port-card {
+      background: var(--card); border: 1px solid var(--hairline);
+      border-radius: var(--r-md); overflow: hidden;
+      transition: transform .2s, border-color .2s;
+    }
+    .port-card:hover { transform: translateY(-4px); border-color: rgba(32,32,32,.22); }
+    .port-thumb {
+      aspect-ratio: 9/16; max-height: 200px;
+      background: var(--bone);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 38px; position: relative;
+    }
+    .port-platform {
+      position: absolute; top: 10px; right: 10px;
+      background: var(--dark); color: var(--on-dark);
+      padding: 3px 10px; border-radius: var(--r-full);
+      font-size: 11px; font-weight: 700;
+    }
+    .port-info { padding: 18px; }
+    .port-info h4 { font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+    .port-stats { display: flex; gap: 10px; flex-wrap: wrap; }
+    .port-stat { font-size: 12px; color: var(--primary); font-weight: 700; }
+    .port-stat small { display: block; color: var(--ash); font-size: 11px; font-weight: 400; }
+
+    /* ── 성과 (canvas) ─────────────── */
+    .perf-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 16px;
       margin-top: 52px;
     }
-    .result-card {
-      position: relative; border-radius: var(--r-lg); overflow: hidden;
-      aspect-ratio: 9/16;
+    .perf-card {
+      display: flex; flex-direction: column; gap: 0;
+      border-radius: var(--r-lg); overflow: hidden;
       background: var(--dark);
       box-shadow: 0 4px 20px rgba(0,0,0,.10);
       transition: transform .3s cubic-bezier(.2,0,0,1), box-shadow .3s;
-      cursor: default;
     }
-    .result-card:hover {
-      transform: translateY(-6px) scale(1.02);
-      box-shadow: 0 16px 48px rgba(0,0,0,.18);
+    .perf-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(0,0,0,.20);
     }
-    .result-card img {
-      width: 100%; height: 100%; object-fit: contain; display: block;
-    }
-    .result-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.10) 50%, transparent 100%);
-      display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 20px 18px;
-    }
-    .result-views {
-      font-family: var(--ff-d);
-      font-size: 32px; font-weight: 700;
-      color: #fff; line-height: 1;
-      letter-spacing: -1px;
-    }
-    .result-label {
-      font-size: 12px; font-weight: 600;
-      color: rgba(255,255,255,.65);
-      margin-top: 4px; letter-spacing: 0.5px;
-    }
-    .result-badge {
-      position: absolute; top: 12px; left: 12px;
-      background: var(--primary); color: #fff;
-      font-size: 10px; font-weight: 700;
-      padding: 3px 9px; border-radius: var(--r-full);
-      letter-spacing: 0.3px;
-    }
-    @media (max-width: 768px) {
-      .result-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-      .result-views { font-size: 24px; }
-    }
-    @media (max-width: 480px) {
-      .result-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-    }
-
-    /* ── CIRCULAR GALLERY ─────────────── */
-    .circ-wrap {
-      width: 100%; height: 500px;
-      perspective: 2000px;
+    .perf-img-wrap {
+      width: 100%; aspect-ratio: 1/1;
+      overflow: hidden; background: var(--dark);
       display: flex; align-items: center; justify-content: center;
-      margin-top: 52px; position: relative;
     }
-    .circ-disc {
-      position: relative; width: 100%; height: 100%;
-      transform-style: preserve-3d;
-    }
-    .circ-item {
-      position: absolute;
-      width: 260px; height: 360px;
-      left: 50%; top: 50%;
-      margin-left: -130px; margin-top: -180px;
-      border-radius: var(--r-lg); overflow: hidden;
-      box-shadow: 0 12px 48px rgba(0,0,0,.28);
-      background: var(--dark);
-      transition: opacity .35s linear;
-    }
-    .circ-item img {
+    .perf-img-wrap img {
       width: 100%; height: 100%;
       object-fit: contain; display: block;
     }
-    .circ-item-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,.75) 0%, rgba(0,0,0,.05) 55%, transparent 100%);
-      display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 18px 16px;
+    .perf-label {
+      background: var(--dark); padding: 14px 16px;
+      display: flex; align-items: baseline; gap: 5px;
     }
-    .circ-views {
+    .perf-views {
       font-family: var(--ff-d);
-      font-size: 30px; font-weight: 700; color: #fff;
+      font-size: 26px; font-weight: 700; color: #fff;
       line-height: 1; letter-spacing: -1px;
     }
-    .circ-label {
-      font-size: 11px; font-weight: 600; letter-spacing: 0.5px;
-      color: rgba(255,255,255,.6); margin-top: 3px;
-    }
-    .circ-badge {
-      position: absolute; top: 10px; left: 10px;
+    .perf-unit { font-size: 13px; font-weight: 600; color: rgba(255,255,255,.55); }
+    .perf-badge {
+      margin-left: auto;
       background: var(--primary); color: #fff;
       font-size: 10px; font-weight: 700;
       padding: 3px 9px; border-radius: var(--r-full);
     }
     @media (max-width: 768px) {
-      .circ-wrap { height: 420px; }
-      .circ-item { width: 200px; height: 280px; margin-left: -100px; margin-top: -140px; }
-      .circ-views { font-size: 22px; }
+      .perf-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .perf-views { font-size: 20px; }
+    }
+    @media (max-width: 480px) {
+      .perf-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
     }
 
     /* ── 병의원 VIDEO ──────────────── */
@@ -1005,42 +979,124 @@
   </div>
 </section>
 
-<!-- RESULT (circular gallery) -->
+<!-- PORTFOLIO (original) -->
 <section class="sec sec-bone" id="portfolio">
   <div class="inner">
-    <p class="eyebrow fade-up">실제 성과</p>
+    <p class="eyebrow fade-up">포트폴리오</p>
     <h2 class="sec-title fade-up">숫자가 증명합니다</h2>
-    <p class="sec-sub fade-up">플로우 미디어가 제작한 숏폼의 실제 인사이트 캡처입니다.</p>
-    <div class="circ-wrap fade-up">
-      <div class="circ-disc" id="circ-disc">
-        <div class="circ-item" data-angle="0">
+    <div class="port-grid" style="margin-top:52px">
+      <div class="port-card fade-up">
+        <div class="port-thumb">💄<span class="port-platform">Reels</span></div>
+        <div class="port-info">
+          <h4>뷰티 브랜드 — 제품 리뷰</h4>
+          <div class="port-stats">
+            <div class="port-stat">조회수 120만<small>Views</small></div>
+            <div class="port-stat">좋아요 8.4만<small>Likes</small></div>
+            <div class="port-stat">공유 2,100<small>Shares</small></div>
+          </div>
+        </div>
+      </div>
+      <div class="port-card fade-up" style="transition-delay:.07s">
+        <div class="port-thumb">🏥<span class="port-platform">Shorts</span></div>
+        <div class="port-info">
+          <h4>피부과 — 시술 정보 콘텐츠</h4>
+          <div class="port-stats">
+            <div class="port-stat">조회수 23만<small>Views</small></div>
+            <div class="port-stat">문의 +340건<small>Inquiries</small></div>
+            <div class="port-stat">구독 +980<small>Subs</small></div>
+          </div>
+        </div>
+      </div>
+      <div class="port-card fade-up" style="transition-delay:.14s">
+        <div class="port-thumb">👗<span class="port-platform">Reels</span></div>
+        <div class="port-info">
+          <h4>의류 쇼핑몰 — 신상 코디</h4>
+          <div class="port-stats">
+            <div class="port-stat">조회수 67만<small>Views</small></div>
+            <div class="port-stat">매출 +31%<small>Revenue</small></div>
+            <div class="port-stat">저장 3.1만<small>Saves</small></div>
+          </div>
+        </div>
+      </div>
+      <div class="port-card fade-up" style="transition-delay:.21s">
+        <div class="port-thumb">⚖️<span class="port-platform">Shorts</span></div>
+        <div class="port-info">
+          <h4>법무사 — 생활법률 정보</h4>
+          <div class="port-stats">
+            <div class="port-stat">조회수 15만<small>Views</small></div>
+            <div class="port-stat">문의 +210<small>Inquiries</small></div>
+            <div class="port-stat">구독 +1,400<small>Subs</small></div>
+          </div>
+        </div>
+      </div>
+      <div class="port-card fade-up" style="transition-delay:.28s">
+        <div class="port-thumb">🏠<span class="port-platform">TikTok</span></div>
+        <div class="port-info">
+          <h4>인테리어 — 시공 비포애프터</h4>
+          <div class="port-stats">
+            <div class="port-stat">조회수 89만<small>Views</small></div>
+            <div class="port-stat">팔로워 +5,600<small>Followers</small></div>
+            <div class="port-stat">좋아요 6.2만<small>Likes</small></div>
+          </div>
+        </div>
+      </div>
+      <div class="port-card fade-up" style="transition-delay:.35s">
+        <div class="port-thumb">📚<span class="port-platform">Shorts</span></div>
+        <div class="port-info">
+          <h4>교육 서비스 — 학습법 콘텐츠</h4>
+          <div class="port-stats">
+            <div class="port-stat">조회수 41만<small>Views</small></div>
+            <div class="port-stat">구독 +3,200<small>Subs</small></div>
+            <div class="port-stat">저장 1.8만<small>Saves</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 성과 (실제 인사이트 캡처) -->
+<section class="sec sec-canvas" id="results">
+  <div class="inner">
+    <p class="eyebrow fade-up">실제 성과</p>
+    <h2 class="sec-title fade-up">직접 찍은 인사이트</h2>
+    <p class="sec-sub fade-up">플로우 미디어가 제작한 숏폼의 실제 플랫폼 인사이트 캡처입니다.</p>
+    <div class="perf-grid">
+      <div class="perf-card fade-up">
+        <div class="perf-img-wrap">
           <img src="성과/179만회.jpeg" alt="조회수 179만회" loading="lazy">
-          <div class="circ-item-overlay">
-            <div class="circ-views">179만</div>
-            <div class="circ-label">VIEWS</div>
-          </div>
-          <span class="circ-badge">최고 기록</span>
         </div>
-        <div class="circ-item" data-angle="90">
+        <div class="perf-label">
+          <span class="perf-views">179만</span>
+          <span class="perf-unit">조회수</span>
+          <span class="perf-badge">최고 기록</span>
+        </div>
+      </div>
+      <div class="perf-card fade-up" style="transition-delay:.08s">
+        <div class="perf-img-wrap">
           <img src="성과/77만회.jpeg" alt="조회수 77만회" loading="lazy">
-          <div class="circ-item-overlay">
-            <div class="circ-views">77만</div>
-            <div class="circ-label">VIEWS</div>
-          </div>
         </div>
-        <div class="circ-item" data-angle="180">
+        <div class="perf-label">
+          <span class="perf-views">77만</span>
+          <span class="perf-unit">조회수</span>
+        </div>
+      </div>
+      <div class="perf-card fade-up" style="transition-delay:.16s">
+        <div class="perf-img-wrap">
           <img src="성과/74만회.jpeg" alt="조회수 74만회" loading="lazy">
-          <div class="circ-item-overlay">
-            <div class="circ-views">74만</div>
-            <div class="circ-label">VIEWS</div>
-          </div>
         </div>
-        <div class="circ-item" data-angle="270">
+        <div class="perf-label">
+          <span class="perf-views">74만</span>
+          <span class="perf-unit">조회수</span>
+        </div>
+      </div>
+      <div class="perf-card fade-up" style="transition-delay:.24s">
+        <div class="perf-img-wrap">
           <img src="성과/33만회.jpeg" alt="조회수 33만회" loading="lazy">
-          <div class="circ-item-overlay">
-            <div class="circ-views">33만</div>
-            <div class="circ-label">VIEWS</div>
-          </div>
+        </div>
+        <div class="perf-label">
+          <span class="perf-views">33만</span>
+          <span class="perf-unit">조회수</span>
         </div>
       </div>
     </div>
@@ -1412,41 +1468,6 @@ void main(void){
     window.addEventListener('resize', render);
   })();
 
-  /* ── Circular Gallery ── */
-  (function initCircGallery() {
-    const disc = document.getElementById('circ-disc');
-    if (!disc) return;
-    const items = disc.querySelectorAll('.circ-item');
-    const RADIUS = window.innerWidth < 768 ? 320 : 500;
-
-    items.forEach(item => {
-      const angle = parseFloat(item.dataset.angle) || 0;
-      item.style.transform = `rotateY(${angle}deg) translateZ(${RADIUS}px)`;
-    });
-
-    let rotation = 0;
-    let active = true;
-
-    const obs = new IntersectionObserver(entries => {
-      active = entries[0].isIntersecting;
-    }, { threshold: 0.1 });
-    obs.observe(disc.closest('section') || disc);
-
-    function tick() {
-      if (active) {
-        rotation += 0.018;
-        disc.style.transform = `rotateY(${rotation}deg)`;
-        items.forEach(item => {
-          const angle = parseFloat(item.dataset.angle) || 0;
-          let rel = ((angle + rotation) % 360 + 360) % 360;
-          if (rel > 180) rel = 360 - rel;
-          item.style.opacity = Math.max(0.22, 1 - rel / 180);
-        });
-      }
-      requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  })();
 </script>
 </body>
 </html>
