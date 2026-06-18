@@ -365,15 +365,18 @@
     }
     .vid-thumb:hover .vid-overlay { background: rgba(0,0,0,.38); }
     .vid-play-btn {
-      width: 52px; height: 52px;
-      background: rgba(255,255,255,.9);
+      width: 58px; height: 58px;
+      background: var(--primary);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 20px rgba(0,0,0,.28);
-      transition: transform .2s;
+      box-shadow: 0 0 0 0 rgba(190,255,15,.35), 0 6px 24px rgba(0,0,0,.5);
+      transition: transform .22s cubic-bezier(.2,0,0,1), box-shadow .22s;
     }
-    .vid-play-btn svg { width: 20px; height: 20px; fill: var(--ink); margin-left: 3px; }
-    .vid-thumb:hover .vid-play-btn { transform: scale(1.12); }
+    .vid-play-btn svg { width: 22px; height: 22px; fill: #0a0a0a; margin-left: 4px; }
+    .vid-thumb:hover .vid-play-btn {
+      transform: scale(1.1);
+      box-shadow: 0 0 0 10px rgba(190,255,15,.18), 0 6px 24px rgba(0,0,0,.5);
+    }
     .vid-cat-label {
       position: absolute; bottom: 10px; left: 10px;
       background: var(--primary); color: var(--on-primary);
@@ -1035,7 +1038,7 @@
           <span class="vid-cat-label">전문직</span>
         </div>
       </div>
-      <div class="vid-card" data-cat="전문직">
+      <div class="vid-card" data-cat="전문직" data-drive="true">
         <div class="vid-thumb" data-drive-src="https://drive.google.com/file/d/1jMZab5pPfGpDiRK_vso5Xxraw17p0f0I/preview">
           <div class="vid-drive-placeholder">
             <div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
@@ -1547,6 +1550,9 @@ void main(void) {
 
   /* ── 포트폴리오 비디오 ── */
   (function initVidPortfolio() {
+    // 초기: 전체 보기일 때 Drive 카드 숨김
+    document.querySelectorAll('.vid-card[data-drive="true"]').forEach(c => c.style.display = 'none');
+
     // 카테고리 필터
     document.querySelectorAll('.vid-filter').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -1560,7 +1566,9 @@ void main(void) {
         btn.classList.add('active');
         const filter = btn.dataset.filter;
         document.querySelectorAll('.vid-card').forEach(card => {
-          card.style.display = (filter === 'all' || card.dataset.cat === filter) ? '' : 'none';
+          const catMatch = filter === 'all' || card.dataset.cat === filter;
+          const driveHidden = filter === 'all' && card.dataset.drive === 'true';
+          card.style.display = (catMatch && !driveHidden) ? '' : 'none';
         });
       });
     });
