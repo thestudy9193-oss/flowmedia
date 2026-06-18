@@ -297,44 +297,61 @@
     }
     .proc-banner strong em { font-style: normal; color: var(--primary); }
 
-    /* ── PORTFOLIO (bone) ────────────── */
-    .port-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 36px; }
-    .filter-btn {
-      padding: 6px 16px; border-radius: var(--r-full);
-      border: 1px solid var(--hairline); background: transparent;
-      color: var(--charcoal); font-size: 13px; font-weight: 600;
-      font-family: var(--ff-b); cursor: pointer; transition: all .15s;
+    /* ── RESULT (bone) ─────────────── */
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 52px;
     }
-    .filter-btn.active, .filter-btn:hover {
-      background: var(--ink); color: var(--on-dark); border-color: var(--ink);
+    .result-card {
+      position: relative; border-radius: var(--r-lg); overflow: hidden;
+      aspect-ratio: 9/16;
+      background: var(--dark);
+      box-shadow: 0 4px 20px rgba(0,0,0,.10);
+      transition: transform .3s cubic-bezier(.2,0,0,1), box-shadow .3s;
+      cursor: default;
     }
-    .port-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-      gap: 14px;
+    .result-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 16px 48px rgba(0,0,0,.18);
     }
-    .port-card {
-      background: var(--card); border: 1px solid var(--hairline);
-      border-radius: var(--r-md); overflow: hidden;
-      transition: transform .2s, border-color .2s;
+    .result-card img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform .4s cubic-bezier(.2,0,0,1);
     }
-    .port-card:hover { transform: translateY(-4px); border-color: rgba(32,32,32,.22); }
-    .port-thumb {
-      aspect-ratio: 9/16; max-height: 200px;
-      background: var(--bone);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 38px; position: relative;
+    .result-card:hover img { transform: scale(1.04); }
+    .result-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.10) 50%, transparent 100%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 20px 18px;
     }
-    .port-platform {
-      position: absolute; top: 10px; right: 10px;
-      background: var(--dark); color: var(--on-dark);
-      padding: 3px 10px; border-radius: var(--r-full);
-      font-size: 11px; font-weight: 700;
+    .result-views {
+      font-family: var(--ff-d);
+      font-size: 32px; font-weight: 700;
+      color: #fff; line-height: 1;
+      letter-spacing: -1px;
     }
-    .port-info { padding: 18px; }
-    .port-info h4 { font-size: 14px; font-weight: 600; margin-bottom: 10px; }
-    .port-stats { display: flex; gap: 10px; flex-wrap: wrap; }
-    .port-stat { font-size: 12px; color: var(--primary); font-weight: 700; }
-    .port-stat small { display: block; color: var(--ash); font-size: 11px; font-weight: 400; }
+    .result-label {
+      font-size: 12px; font-weight: 600;
+      color: rgba(255,255,255,.65);
+      margin-top: 4px; letter-spacing: 0.5px;
+    }
+    .result-badge {
+      position: absolute; top: 12px; left: 12px;
+      background: var(--primary); color: #fff;
+      font-size: 10px; font-weight: 700;
+      padding: 3px 9px; border-radius: var(--r-full);
+      letter-spacing: 0.3px;
+    }
+    @media (max-width: 768px) {
+      .result-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .result-views { font-size: 24px; }
+    }
+    @media (max-width: 480px) {
+      .result-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    }
 
     /* ── PRICING (canvas) ────────────── */
     .pricing-group { margin-bottom: 60px; }
@@ -997,84 +1014,40 @@
   </div>
 </section>
 
-<!-- PORTFOLIO -->
+<!-- RESULT -->
 <section class="sec sec-bone" id="portfolio">
   <div class="inner">
-    <p class="eyebrow fade-up">포트폴리오</p>
+    <p class="eyebrow fade-up">실제 성과</p>
     <h2 class="sec-title fade-up">숫자가 증명합니다</h2>
-    <div class="port-filters" style="margin-top:40px">
-      <button class="filter-btn active">전체</button>
-      <button class="filter-btn">식음료</button>
-      <button class="filter-btn">뷰티</button>
-      <button class="filter-btn">의료·병원</button>
-      <button class="filter-btn">쇼핑몰</button>
-      <button class="filter-btn">전문직</button>
-    </div>
-    <div class="port-grid">
-      <div class="port-card fade-up">
-        <div class="port-thumb">🍔<span class="port-platform">Reels</span></div>
-        <div class="port-info">
-          <h4>F&B 브랜드 — 신메뉴 런칭</h4>
-          <div class="port-stats">
-            <div class="port-stat">조회수 48만<small>Views</small></div>
-            <div class="port-stat">팔로워 +2,300<small>Followers</small></div>
-            <div class="port-stat">저장 1.2만<small>Saves</small></div>
-          </div>
+    <p class="sec-sub fade-up">플로우 미디어가 제작한 숏폼의 실제 인사이트 캡처입니다.</p>
+    <div class="result-grid">
+      <div class="result-card fade-up">
+        <img src="성과/179만회.jpeg" alt="조회수 179만회 숏폼 인사이트" loading="lazy">
+        <div class="result-overlay">
+          <div class="result-views">179만</div>
+          <div class="result-label">VIEWS</div>
+        </div>
+        <span class="result-badge">최고 기록</span>
+      </div>
+      <div class="result-card fade-up" style="transition-delay:.08s">
+        <img src="성과/77만회.jpeg" alt="조회수 77만회 숏폼 인사이트" loading="lazy">
+        <div class="result-overlay">
+          <div class="result-views">77만</div>
+          <div class="result-label">VIEWS</div>
         </div>
       </div>
-      <div class="port-card fade-up" style="transition-delay:.07s">
-        <div class="port-thumb">💄<span class="port-platform">TikTok</span></div>
-        <div class="port-info">
-          <h4>뷰티 브랜드 — 제품 리뷰</h4>
-          <div class="port-stats">
-            <div class="port-stat">조회수 120만<small>Views</small></div>
-            <div class="port-stat">좋아요 8.4만<small>Likes</small></div>
-            <div class="port-stat">공유 2,100<small>Shares</small></div>
-          </div>
+      <div class="result-card fade-up" style="transition-delay:.16s">
+        <img src="성과/74만회.jpeg" alt="조회수 74만회 숏폼 인사이트" loading="lazy">
+        <div class="result-overlay">
+          <div class="result-views">74만</div>
+          <div class="result-label">VIEWS</div>
         </div>
       </div>
-      <div class="port-card fade-up" style="transition-delay:.14s">
-        <div class="port-thumb">🏥<span class="port-platform">Shorts</span></div>
-        <div class="port-info">
-          <h4>피부과 — 시술 정보 콘텐츠</h4>
-          <div class="port-stats">
-            <div class="port-stat">조회수 23만<small>Views</small></div>
-            <div class="port-stat">문의 +340건<small>Inquiries</small></div>
-            <div class="port-stat">구독 +980<small>Subs</small></div>
-          </div>
-        </div>
-      </div>
-      <div class="port-card fade-up" style="transition-delay:.21s">
-        <div class="port-thumb">👗<span class="port-platform">Reels</span></div>
-        <div class="port-info">
-          <h4>의류 쇼핑몰 — 신상 코디</h4>
-          <div class="port-stats">
-            <div class="port-stat">조회수 67만<small>Views</small></div>
-            <div class="port-stat">매출 +31%<small>Revenue</small></div>
-            <div class="port-stat">저장 3.1만<small>Saves</small></div>
-          </div>
-        </div>
-      </div>
-      <div class="port-card fade-up" style="transition-delay:.28s">
-        <div class="port-thumb">⚖️<span class="port-platform">Shorts</span></div>
-        <div class="port-info">
-          <h4>법무사 — 생활법률 정보</h4>
-          <div class="port-stats">
-            <div class="port-stat">조회수 15만<small>Views</small></div>
-            <div class="port-stat">문의 +210<small>Inquiries</small></div>
-            <div class="port-stat">구독 +1,400<small>Subs</small></div>
-          </div>
-        </div>
-      </div>
-      <div class="port-card fade-up" style="transition-delay:.35s">
-        <div class="port-thumb">🍕<span class="port-platform">TikTok</span></div>
-        <div class="port-info">
-          <h4>식당 — 메뉴 ASMR</h4>
-          <div class="port-stats">
-            <div class="port-stat">조회수 89만<small>Views</small></div>
-            <div class="port-stat">팔로워 +5,600<small>Followers</small></div>
-            <div class="port-stat">좋아요 6.2만<small>Likes</small></div>
-          </div>
+      <div class="result-card fade-up" style="transition-delay:.24s">
+        <img src="성과/33만회.jpeg" alt="조회수 33만회 숏폼 인사이트" loading="lazy">
+        <div class="result-overlay">
+          <div class="result-views">33만</div>
+          <div class="result-label">VIEWS</div>
         </div>
       </div>
     </div>
@@ -1367,13 +1340,6 @@ void main(void){
     });
   });
 
-  /* ── 포트폴리오 필터 (UI) ── */
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    });
-  });
 
   /* ── 후기 슬라이더 ── */
   (function initTestimonials() {
