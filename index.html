@@ -522,6 +522,90 @@
       50% { opacity: .25; transform: scale(.45); }
     }
 
+    /* ── TESTIMONIALS (canvas) ───────── */
+    #testimonials { overflow: hidden; }
+    .testi-wrap {
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      gap: 60px; align-items: center;
+    }
+    .testi-left { position: relative; }
+    .testi-left .eyebrow { margin-bottom: 16px; }
+    .testi-left .sec-title { margin-bottom: 28px; }
+    .testi-desc {
+      font-size: 16px; color: var(--charcoal); line-height: 1.65;
+      margin-bottom: 36px;
+    }
+    .testi-dots {
+      display: flex; gap: 8px; align-items: center;
+    }
+    .testi-dot {
+      width: 8px; height: 8px;
+      border-radius: var(--r-full);
+      background: var(--ash); cursor: pointer;
+      transition: background .3s, width .3s;
+      border: none; padding: 0;
+    }
+    .testi-dot.active {
+      background: var(--primary); width: 24px;
+    }
+    .testi-right {
+      position: relative; height: 280px; overflow: hidden;
+    }
+    .testi-card {
+      position: absolute; inset: 0;
+      background: var(--card);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-lg);
+      padding: 36px 40px;
+      opacity: 0;
+      transform: translateX(60px);
+      transition: opacity .6s cubic-bezier(.2,0,0,1), transform .6s cubic-bezier(.2,0,0,1);
+      pointer-events: none;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .testi-card.active {
+      opacity: 1; transform: translateX(0);
+      pointer-events: auto;
+    }
+    .testi-card.exit {
+      opacity: 0; transform: translateX(-60px);
+    }
+    .testi-stars {
+      display: flex; gap: 3px; margin-bottom: 18px;
+    }
+    .testi-stars span {
+      color: #f59e0b; font-size: 16px;
+    }
+    .testi-quote {
+      font-family: var(--ff-d);
+      font-size: 20px; font-weight: 600;
+      line-height: 1.5; letter-spacing: -0.3px;
+      color: var(--ink); margin-bottom: 28px;
+      flex: 1;
+    }
+    .testi-author {
+      display: flex; align-items: center; gap: 14px;
+    }
+    .testi-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--primary); color: var(--on-primary);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--ff-d); font-size: 18px; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .testi-meta { display: flex; flex-direction: column; }
+    .testi-name {
+      font-size: 15px; font-weight: 700; color: var(--ink);
+    }
+    .testi-role { font-size: 13px; color: var(--charcoal); }
+
+    @media (max-width: 768px) {
+      .testi-wrap { grid-template-columns: 1fr; gap: 32px; }
+      .testi-right { height: 300px; }
+      .testi-card { padding: 24px; }
+      .testi-quote { font-size: 17px; }
+    }
+
     /* ── FADE UP ─────────────────────── */
     .fade-up {
       opacity: 0; transform: translateY(22px);
@@ -537,14 +621,68 @@
     @media (max-width: 768px) {
       nav ul { display: none; }
       nav { padding: 0 20px; }
+
+      /* 히어로 */
+      .hero-title {
+        font-size: clamp(36px, 10vw, 52px);
+        letter-spacing: -1.5px;
+        word-break: keep-all;
+      }
+      .hero-sub { font-size: 16px; }
+      .hero-btns { flex-direction: column; align-items: center; gap: 10px; }
+      .btn-hero-white, .btn-hero-ghost { width: 100%; max-width: 300px; justify-content: center; }
+
+      /* 섹션 타이틀 */
+      .sec-title {
+        font-size: clamp(28px, 8vw, 40px);
+        letter-spacing: -1px;
+        word-break: keep-all;
+      }
+      .sec-sub { font-size: 15px; margin-bottom: 40px; }
+
+      /* 섹션 패딩 */
+      .sec { padding: 64px 20px; }
+      #stats { padding: 56px 20px; }
+
+      /* 스탯 */
       .stats-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
       .stat-divider { display: none; }
+      .stat-number { font-size: clamp(36px, 8vw, 52px); }
+      .stat-number.hero-num { font-size: clamp(48px, 12vw, 72px); }
+
+      /* 카드류 */
+      .problem-grid, .why-grid, .service-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
       .diff-item { flex-direction: column; gap: 8px; }
-      .process-steps { grid-template-columns: 1fr; }
+      .diff-num { font-size: 36px; }
+      .process-steps { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .proc-banner strong { font-size: 20px; }
+      .port-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .pricing-cards { grid-template-columns: 1fr; }
+      .pricing-cards.is-in .pricing-card:not(.featured),
+      .pricing-cards.is-in .pricing-card.featured {
+        transform: translateY(0) scale(1);
+      }
+
+      /* CTA */
+      #cta { padding: 80px 20px; }
+      #cta h2 { word-break: keep-all; letter-spacing: -1px; }
+      .btn-cta-white { padding: 16px 28px; font-size: 16px; }
+
+      /* 푸터 */
       .footer-inner { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+
+      /* 플로팅 카카오 */
       .floating-kakao { right: 14px; bottom: 20px; }
       .floating-kakao a { font-size: 13px; padding: 11px 16px; }
+    }
+
+    @media (max-width: 480px) {
+      .problem-grid, .why-grid, .service-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr; }
+      .port-grid { grid-template-columns: 1fr; }
+      .stats-inner { grid-template-columns: 1fr 1fr; }
+      .hero-title { letter-spacing: -1px; }
     }
   </style>
 </head>
@@ -568,7 +706,7 @@
   <canvas id="hero-canvas"></canvas>
   <div class="hero-content">
     <p class="hero-eyebrow">릴스 · 쇼츠 · 틱톡 전문 대행사</p>
-    <h1 class="hero-title">스크롤을 멈추는 영상,<br>매출을 만드는 콘텐츠</h1>
+    <h1 class="hero-title">스크롤을 멈추는 영상, 매출을 만드는 콘텐츠</h1>
     <p class="hero-sub">기획부터 편집, 업로드까지 — 브랜드에 맞는 숏폼을 데이터 기반으로 운영합니다.</p>
     <div class="hero-btns">
       <a href="https://open.kakao.com/o/s1aWjbAi" target="_blank" class="btn-hero-white">무료 상담 신청</a>
@@ -627,14 +765,9 @@
 <section class="sec sec-bone" id="problem">
   <div class="inner">
     <p class="eyebrow fade-up">공감하신다면</p>
-    <h2 class="sec-title fade-up">이런 고민,<br>있으신가요?</h2>
+    <h2 class="sec-title fade-up">이런 고민, 있으신가요?</h2>
     <div class="problem-grid">
       <div class="problem-card fade-up">
-        <div class="p-icon">😮‍💨</div>
-        <h4>직접 찍었는데 조회수 100도 안 나와요</h4>
-        <p>열심히 만들었지만 알고리즘이 밀어주지 않는 현실</p>
-      </div>
-      <div class="problem-card fade-up" style="transition-delay:.05s">
         <div class="p-icon">🤔</div>
         <h4>뭘 찍어야 할지 모르겠어요</h4>
         <p>콘텐츠 기획이 막막하고 아이디어가 매번 떨어짐</p>
@@ -693,7 +826,7 @@
 <section class="sec sec-dark" id="why-us">
   <div class="inner">
     <p class="eyebrow eyebrow-dark fade-up">차별점</p>
-    <h2 class="sec-title sec-title-dark fade-up">플로우 미디어가<br>다른 이유</h2>
+    <h2 class="sec-title sec-title-dark fade-up">플로우 미디어가 다른 이유</h2>
     <div class="diff-list" style="margin-top:48px">
       <div class="diff-item fade-up">
         <div class="diff-num">01</div>
@@ -720,11 +853,87 @@
   </div>
 </section>
 
+<!-- TESTIMONIALS -->
+<section class="sec sec-canvas" id="testimonials">
+  <div class="inner">
+    <div class="testi-wrap fade-up">
+      <div class="testi-left">
+        <p class="eyebrow">클라이언트 후기</p>
+        <h2 class="sec-title">실제로 맡겨본<br>대표님들의 이야기</h2>
+        <p class="testi-desc">숫자보다 진짜 현장의 목소리가<br>더 정확한 검증입니다.</p>
+        <div class="testi-dots" id="testi-dots"></div>
+      </div>
+      <div class="testi-right" id="testi-right">
+        <div class="testi-card active" data-index="0">
+          <div>
+            <div class="testi-stars">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+            <p class="testi-quote">"맡기고 나서 팔로워가 3개월 만에 1,200명에서 8,400명으로 늘었어요. 직접 찍을 때랑 퀄리티 차이가 확실합니다."</p>
+          </div>
+          <div class="testi-author">
+            <div class="testi-avatar">김</div>
+            <div class="testi-meta">
+              <span class="testi-name">김○○ 대표</span>
+              <span class="testi-role">뷰티 브랜드 · 인스타그램</span>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card" data-index="1">
+          <div>
+            <div class="testi-stars">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+            <p class="testi-quote">"기획 단계에서 우리 브랜드를 정말 깊이 이해해줘서 놀랐어요. 영상 하나하나가 판매로 이어지는 느낌이 다릅니다."</p>
+          </div>
+          <div class="testi-author">
+            <div class="testi-avatar">박</div>
+            <div class="testi-meta">
+              <span class="testi-name">박○○ 대표</span>
+              <span class="testi-role">식품 브랜드 · 유튜브 쇼츠</span>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card" data-index="2">
+          <div>
+            <div class="testi-stars">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+            <p class="testi-quote">"광고비 100만원 쓸 때랑 효과가 비슷한데, 팔로워는 유지되니까 장기적으로 훨씬 이득이에요. 숫자로 증명해줘서 믿음이 갔어요."</p>
+          </div>
+          <div class="testi-author">
+            <div class="testi-avatar">이</div>
+            <div class="testi-meta">
+              <span class="testi-name">이○○ 이사</span>
+              <span class="testi-role">의료 클리닉 · 틱톡</span>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card" data-index="3">
+          <div>
+            <div class="testi-stars">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+            <p class="testi-quote">"월간 리포트가 너무 좋아요. 어떤 영상이 왜 잘 됐는지 분석해줘서 다음 전략이 명확해집니다."</p>
+          </div>
+          <div class="testi-author">
+            <div class="testi-avatar">최</div>
+            <div class="testi-meta">
+              <span class="testi-name">최○○ 대표</span>
+              <span class="testi-role">인테리어 업체 · 인스타그램</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- SERVICE -->
 <section class="sec sec-bone" id="service">
   <div class="inner">
     <p class="eyebrow fade-up">서비스 구성</p>
-    <h2 class="sec-title fade-up">기획부터 업로드까지<br>전부 맡기세요</h2>
+    <h2 class="sec-title fade-up">기획부터 업로드까지 전부 맡기세요</h2>
     <div class="service-grid" style="margin-top:48px">
       <div class="service-card fade-up">
         <div class="s-icon">💡</div>
@@ -876,7 +1085,7 @@
 <section class="sec sec-canvas" id="pricing">
   <div class="inner">
     <p class="eyebrow fade-up">요금제</p>
-    <h2 class="sec-title fade-up">투명한 가격,<br>명확한 구성</h2>
+    <h2 class="sec-title fade-up">투명한 가격, 명확한 구성</h2>
 
     <div class="pricing-group" style="margin-top:64px">
       <div class="pricing-label fade-up"><em>숏폼</em> 전용 패키지</div>
@@ -977,7 +1186,7 @@
 
 <!-- CTA -->
 <section id="cta">
-  <h2 class="fade-up">지금 경쟁사는<br>올리고 있습니다</h2>
+  <h2 class="fade-up">지금 경쟁사는 올리고 있습니다</h2>
   <p class="fade-up">무료 30분 상담으로 우리 브랜드 숏폼 전략을 확인하세요</p>
   <a href="https://open.kakao.com/o/s1aWjbAi" target="_blank" class="btn-cta-white fade-up">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3C6.477 3 2 6.582 2 11c0 2.83 1.643 5.325 4.127 6.877l-.952 3.544a.375.375 0 0 0 .562.41L9.82 19.24A11.7 11.7 0 0 0 12 19c5.523 0 10-3.582 10-8s-4.477-8-10-8z" fill="#ea2804"/></svg>
@@ -1165,6 +1374,58 @@ void main(void){
       btn.classList.add('active');
     });
   });
+
+  /* ── 후기 슬라이더 ── */
+  (function initTestimonials() {
+    const cards = document.querySelectorAll('.testi-card');
+    const dotsWrap = document.getElementById('testi-dots');
+    if (!cards.length || !dotsWrap) return;
+
+    let current = 0;
+    let timer = null;
+
+    const dots = Array.from({ length: cards.length }, (_, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'testi-dot' + (i === 0 ? ' active' : '');
+      btn.setAttribute('aria-label', `후기 ${i + 1}`);
+      btn.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(btn);
+      return btn;
+    });
+
+    function goTo(next) {
+      if (next === current) return;
+      cards[current].classList.remove('active');
+      cards[current].classList.add('exit');
+      const prev = current;
+      setTimeout(() => cards[prev].classList.remove('exit'), 650);
+      dots[current].classList.remove('active');
+      current = next;
+      cards[current].classList.add('active');
+      dots[current].classList.add('active');
+      resetTimer();
+    }
+
+    function advance() { goTo((current + 1) % cards.length); }
+
+    function resetTimer() {
+      clearInterval(timer);
+      timer = setInterval(advance, 6000);
+    }
+
+    const section = document.getElementById('testimonials');
+    if (section) {
+      const sectionObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { resetTimer(); }
+          else { clearInterval(timer); }
+        });
+      }, { threshold: 0.3 });
+      sectionObs.observe(section);
+    } else {
+      resetTimer();
+    }
+  })();
 </script>
 </body>
 </html>
