@@ -30,25 +30,25 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --canvas:       #f9f7f3;
-      --bone:         #f3f0e8;
-      --card:         #ffffff;
-      --dark:         #202020;
+      --canvas:       #111111;
+      --bone:         #181818;
+      --card:         #222222;
+      --dark:         #080808;
       --deep:         #000000;
       --primary:      #beff0f;
       --primary-deep: #9dcc00;
       --hero-glow:    #beff0f;
       --hero-pink:    #dcff80;
       --on-primary:   #0a0a0a;
-      --ink:          #202020;
-      --body-c:       #3a3a3a;
-      --charcoal:     #575757;
-      --mute:         #646464;
-      --ash:          #8d8d8d;
+      --ink:          #f0f0f0;
+      --body-c:       #c0c0c0;
+      --charcoal:     #a0a0a0;
+      --mute:         #808080;
+      --ash:          #606060;
       --on-dark:      #fcfcfc;
       --on-dark-mute: rgba(252,252,252,0.72);
-      --hairline:     rgba(32,32,32,0.12);
-      --hairline-s:   #202020;
+      --hairline:     rgba(255,255,255,0.1);
+      --hairline-s:   rgba(255,255,255,0.15);
 
       --ff-d: 'Bricolage Grotesque', sans-serif;
       --ff-b: 'Inter', sans-serif;
@@ -508,7 +508,7 @@
     .pricing-cards.is-in .pricing-card.featured:hover {
       transform: translateY(-24px) scale(1);
     }
-    .pricing-card.featured { background: var(--dark); border-color: var(--dark); }
+    .pricing-card.featured { background: var(--deep); border-color: var(--primary); }
     .pricing-badge {
       position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
       background: var(--primary); color: var(--on-primary);
@@ -579,7 +579,7 @@
       font-weight: 700; line-height: 1.0; letter-spacing: -2px;
       color: var(--on-primary); margin-bottom: 18px;
     }
-    #cta p { font-size: 18px; color: rgba(255,255,255,.8); margin-bottom: 40px; }
+    #cta p { font-size: 18px; color: rgba(10,10,10,.7); margin-bottom: 40px; }
     .btn-cta-white {
       background: var(--on-primary); color: var(--primary);
       padding: 18px 44px; border-radius: var(--r-full);
