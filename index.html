@@ -174,6 +174,7 @@
     .stat-number.hero-num {
       font-size: clamp(60px, 9vw, 104px);
       color: var(--primary);
+      white-space: nowrap;
     }
     .stat-label { font-size: 14px; color: var(--charcoal); margin-top: 8px; }
 
@@ -298,34 +299,77 @@
     }
     .proc-banner strong em { font-style: normal; color: var(--primary); }
 
-    /* ── PORTFOLIO (bone) ────────────── */
-    .port-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-      gap: 14px;
+    /* ── VIDEO PORTFOLIO (bone) ───────── */
+    .vid-filters {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      margin-top: 40px; margin-bottom: 36px;
     }
-    .port-card {
-      background: var(--card); border: 1px solid var(--hairline);
-      border-radius: var(--r-md); overflow: hidden;
-      transition: transform .2s, border-color .2s;
+    .vid-filter {
+      padding: 7px 18px; border-radius: var(--r-full);
+      border: 1px solid var(--hairline); background: transparent;
+      color: var(--charcoal); font-size: 13px; font-weight: 600;
+      font-family: var(--ff-b); cursor: pointer; transition: all .15s;
     }
-    .port-card:hover { transform: translateY(-4px); border-color: rgba(32,32,32,.22); }
-    .port-thumb {
-      aspect-ratio: 9/16; max-height: 200px;
-      background: var(--bone);
+    .vid-filter.active, .vid-filter:hover {
+      background: var(--ink); color: var(--on-dark); border-color: var(--ink);
+    }
+    .vid-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+    }
+    .vid-card { display: flex; flex-direction: column; }
+    .vid-card.hidden { display: none; }
+    .vid-thumb {
+      position: relative; aspect-ratio: 9/16;
+      overflow: hidden; border-radius: var(--r-md);
+      background: var(--dark); cursor: pointer;
+    }
+    .vid-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform .35s cubic-bezier(.2,0,0,1);
+    }
+    .vid-thumb:hover img { transform: scale(1.06); }
+    .vid-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,.22);
       display: flex; align-items: center; justify-content: center;
-      font-size: 38px; position: relative;
+      transition: background .2s;
     }
-    .port-platform {
-      position: absolute; top: 10px; right: 10px;
-      background: var(--dark); color: var(--on-dark);
-      padding: 3px 10px; border-radius: var(--r-full);
-      font-size: 11px; font-weight: 700;
+    .vid-thumb:hover .vid-overlay { background: rgba(0,0,0,.38); }
+    .vid-play-btn {
+      width: 52px; height: 52px;
+      background: rgba(255,255,255,.9);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,.28);
+      transition: transform .2s;
     }
-    .port-info { padding: 18px; }
-    .port-info h4 { font-size: 14px; font-weight: 600; margin-bottom: 10px; }
-    .port-stats { display: flex; gap: 10px; flex-wrap: wrap; }
-    .port-stat { font-size: 12px; color: var(--primary); font-weight: 700; }
-    .port-stat small { display: block; color: var(--ash); font-size: 11px; font-weight: 400; }
+    .vid-play-btn svg { width: 20px; height: 20px; fill: var(--ink); margin-left: 3px; }
+    .vid-thumb:hover .vid-play-btn { transform: scale(1.12); }
+    .vid-cat-label {
+      position: absolute; bottom: 10px; left: 10px;
+      background: var(--primary); color: #fff;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.3px;
+      padding: 3px 9px; border-radius: var(--r-full);
+    }
+    .vid-thumb.playing img,
+    .vid-thumb.playing .vid-overlay { display: none; }
+    .vid-thumb iframe {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; border: none; display: none;
+    }
+    .vid-thumb.playing iframe { display: block; }
+    @media (max-width: 1024px) {
+      .vid-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .vid-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    }
+    @media (max-width: 480px) {
+      .vid-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    }
 
     /* ── 성과 (canvas) ─────────────── */
     .perf-grid {
@@ -865,6 +909,110 @@
   </div>
 </section>
 
+<!-- PORTFOLIO (video) -->
+<section class="sec sec-bone" id="portfolio">
+  <div class="inner">
+    <p class="eyebrow fade-up">포트폴리오</p>
+    <h2 class="sec-title fade-up">직접 확인해보세요</h2>
+    <p class="sec-sub fade-up">카테고리를 선택하고 영상을 클릭하면 바로 재생됩니다.</p>
+    <div class="vid-filters fade-up">
+      <button class="vid-filter active" data-filter="all">전체</button>
+      <button class="vid-filter" data-filter="뷰티">뷰티</button>
+      <button class="vid-filter" data-filter="반려동물">반려동물</button>
+      <button class="vid-filter" data-filter="생활용품">생활용품</button>
+      <button class="vid-filter" data-filter="여행">여행</button>
+      <button class="vid-filter" data-filter="앱홍보">앱홍보</button>
+      <button class="vid-filter" data-filter="전문직">전문직</button>
+    </div>
+    <div class="vid-grid fade-up">
+      <div class="vid-card" data-cat="뷰티">
+        <div class="vid-thumb" data-id="VTAgaJ7g_hU">
+          <img src="https://img.youtube.com/vi/VTAgaJ7g_hU/hqdefault.jpg" alt="뷰티 숏폼 1" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">뷰티</span>
+        </div>
+      </div>
+      <div class="vid-card" data-cat="뷰티">
+        <div class="vid-thumb" data-id="37wAvITu4wg">
+          <img src="https://img.youtube.com/vi/37wAvITu4wg/hqdefault.jpg" alt="뷰티 숏폼 2" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">뷰티</span>
+        </div>
+      </div>
+      <div class="vid-card" data-cat="반려동물">
+        <div class="vid-thumb" data-id="4s0FAPWsBS8">
+          <img src="https://img.youtube.com/vi/4s0FAPWsBS8/hqdefault.jpg" alt="반려동물 숏폼 1" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">반려동물</span>
+        </div>
+      </div>
+      <div class="vid-card" data-cat="반려동물">
+        <div class="vid-thumb" data-id="xbI6uZDektg">
+          <img src="https://img.youtube.com/vi/xbI6uZDektg/hqdefault.jpg" alt="반려동물 숏폼 2" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">반려동물</span>
+        </div>
+      </div>
+      <div class="vid-card" data-cat="생활용품">
+        <div class="vid-thumb" data-id="OsAGaNA7WSo">
+          <img src="https://img.youtube.com/vi/OsAGaNA7WSo/hqdefault.jpg" alt="생활용품 숏폼 1" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">생활용품</span>
+        </div>
+      </div>
+      <div class="vid-card" data-cat="생활용품">
+        <div class="vid-thumb" data-id="23O7nH0Cues">
+          <img src="https://img.youtube.com/vi/23O7nH0Cues/hqdefault.jpg" alt="생활용품 숏폼 2" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">생활용품</span>
+        </div>
+      </div>
+      <div class="vid-card" data-cat="여행">
+        <div class="vid-thumb" data-id="mqOXouMM20s">
+          <img src="https://img.youtube.com/vi/mqOXouMM20s/hqdefault.jpg" alt="여행 숏폼 1" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">여행</span>
+        </div>
+      </div>
+      <div class="vid-card" data-cat="여행">
+        <div class="vid-thumb" data-id="RN0BSZMBgKc">
+          <img src="https://img.youtube.com/vi/RN0BSZMBgKc/hqdefault.jpg" alt="여행 숏폼 2" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">여행</span>
+        </div>
+      </div>
+      <div class="vid-card" data-cat="앱홍보">
+        <div class="vid-thumb" data-id="m4JYd9Pz_j4">
+          <img src="https://img.youtube.com/vi/m4JYd9Pz_j4/hqdefault.jpg" alt="앱홍보 숏폼 1" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">앱홍보</span>
+        </div>
+      </div>
+      <div class="vid-card" data-cat="앱홍보">
+        <div class="vid-thumb" data-id="cXB-NHxW7rk">
+          <img src="https://img.youtube.com/vi/cXB-NHxW7rk/hqdefault.jpg" alt="앱홍보 숏폼 2" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">앱홍보</span>
+        </div>
+      </div>
+      <div class="vid-card" data-cat="전문직">
+        <div class="vid-thumb" data-id="CnrX6MxWlkA">
+          <img src="https://img.youtube.com/vi/CnrX6MxWlkA/hqdefault.jpg" alt="전문직 숏폼 1" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">전문직</span>
+        </div>
+      </div>
+      <div class="vid-card" data-cat="전문직">
+        <div class="vid-thumb" data-id="HFPqw5A67eo">
+          <img src="https://img.youtube.com/vi/HFPqw5A67eo/hqdefault.jpg" alt="전문직 숏폼 2" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">전문직</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- WHY 플로우 (dark) -->
 <section class="sec sec-dark" id="why-us">
   <div class="inner">
@@ -975,82 +1123,6 @@
     </div>
     <div class="proc-banner fade-up">
       <strong>첫 상담부터 첫 영상 업로드까지 <em>단 7일</em></strong>
-    </div>
-  </div>
-</section>
-
-<!-- PORTFOLIO (original) -->
-<section class="sec sec-bone" id="portfolio">
-  <div class="inner">
-    <p class="eyebrow fade-up">포트폴리오</p>
-    <h2 class="sec-title fade-up">숫자가 증명합니다</h2>
-    <div class="port-grid" style="margin-top:52px">
-      <div class="port-card fade-up">
-        <div class="port-thumb">💄<span class="port-platform">Reels</span></div>
-        <div class="port-info">
-          <h4>뷰티 브랜드 — 제품 리뷰</h4>
-          <div class="port-stats">
-            <div class="port-stat">조회수 120만<small>Views</small></div>
-            <div class="port-stat">좋아요 8.4만<small>Likes</small></div>
-            <div class="port-stat">공유 2,100<small>Shares</small></div>
-          </div>
-        </div>
-      </div>
-      <div class="port-card fade-up" style="transition-delay:.07s">
-        <div class="port-thumb">🏥<span class="port-platform">Shorts</span></div>
-        <div class="port-info">
-          <h4>피부과 — 시술 정보 콘텐츠</h4>
-          <div class="port-stats">
-            <div class="port-stat">조회수 23만<small>Views</small></div>
-            <div class="port-stat">문의 +340건<small>Inquiries</small></div>
-            <div class="port-stat">구독 +980<small>Subs</small></div>
-          </div>
-        </div>
-      </div>
-      <div class="port-card fade-up" style="transition-delay:.14s">
-        <div class="port-thumb">👗<span class="port-platform">Reels</span></div>
-        <div class="port-info">
-          <h4>의류 쇼핑몰 — 신상 코디</h4>
-          <div class="port-stats">
-            <div class="port-stat">조회수 67만<small>Views</small></div>
-            <div class="port-stat">매출 +31%<small>Revenue</small></div>
-            <div class="port-stat">저장 3.1만<small>Saves</small></div>
-          </div>
-        </div>
-      </div>
-      <div class="port-card fade-up" style="transition-delay:.21s">
-        <div class="port-thumb">⚖️<span class="port-platform">Shorts</span></div>
-        <div class="port-info">
-          <h4>법무사 — 생활법률 정보</h4>
-          <div class="port-stats">
-            <div class="port-stat">조회수 15만<small>Views</small></div>
-            <div class="port-stat">문의 +210<small>Inquiries</small></div>
-            <div class="port-stat">구독 +1,400<small>Subs</small></div>
-          </div>
-        </div>
-      </div>
-      <div class="port-card fade-up" style="transition-delay:.28s">
-        <div class="port-thumb">🏠<span class="port-platform">TikTok</span></div>
-        <div class="port-info">
-          <h4>인테리어 — 시공 비포애프터</h4>
-          <div class="port-stats">
-            <div class="port-stat">조회수 89만<small>Views</small></div>
-            <div class="port-stat">팔로워 +5,600<small>Followers</small></div>
-            <div class="port-stat">좋아요 6.2만<small>Likes</small></div>
-          </div>
-        </div>
-      </div>
-      <div class="port-card fade-up" style="transition-delay:.35s">
-        <div class="port-thumb">📚<span class="port-platform">Shorts</span></div>
-        <div class="port-info">
-          <h4>교육 서비스 — 학습법 콘텐츠</h4>
-          <div class="port-stats">
-            <div class="port-stat">조회수 41만<small>Views</small></div>
-            <div class="port-stat">구독 +3,200<small>Subs</small></div>
-            <div class="port-stat">저장 1.8만<small>Saves</small></div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -1468,6 +1540,46 @@ void main(void){
     window.addEventListener('resize', render);
   })();
 
+
+  /* ── 포트폴리오 비디오 ── */
+  (function initVidPortfolio() {
+    // 카테고리 필터
+    document.querySelectorAll('.vid-filter').forEach(btn => {
+      btn.addEventListener('click', () => {
+        // 재생 중인 영상 모두 중지
+        document.querySelectorAll('.vid-thumb.playing').forEach(p => {
+          p.classList.remove('playing');
+          const f = p.querySelector('iframe');
+          if (f) f.remove();
+        });
+        document.querySelectorAll('.vid-filter').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.vid-card').forEach(card => {
+          card.style.display = (filter === 'all' || card.dataset.cat === filter) ? '' : 'none';
+        });
+      });
+    });
+
+    // 클릭 자동재생
+    document.querySelectorAll('.vid-thumb').forEach(thumb => {
+      thumb.addEventListener('click', function () {
+        if (this.classList.contains('playing')) return;
+        // 다른 재생 중 영상 중지
+        document.querySelectorAll('.vid-thumb.playing').forEach(p => {
+          p.classList.remove('playing');
+          const f = p.querySelector('iframe');
+          if (f) f.remove();
+        });
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube.com/embed/${this.dataset.id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+        iframe.allow = 'autoplay; fullscreen; encrypted-media; picture-in-picture';
+        iframe.allowFullscreen = true;
+        this.appendChild(iframe);
+        this.classList.add('playing');
+      });
+    });
+  })();
 </script>
 </body>
 </html>
