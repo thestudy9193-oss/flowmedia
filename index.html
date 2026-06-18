@@ -116,9 +116,10 @@
     }
     .hero-title {
       font-family: var(--ff-d);
-      font-size: clamp(52px, 9vw, 108px);
-      font-weight: 700; line-height: 1.0; letter-spacing: -3px;
-      color: var(--on-primary); margin-bottom: 28px; max-width: 920px;
+      font-size: clamp(44px, 6.5vw, 80px);
+      font-weight: 700; line-height: 1.12; letter-spacing: -2.5px;
+      color: var(--on-primary); margin-bottom: 28px; max-width: 800px;
+      word-break: keep-all;
     }
     .hero-sub {
       font-size: 18px; line-height: 1.56; color: rgba(255,255,255,.82);
@@ -317,10 +318,8 @@
       box-shadow: 0 16px 48px rgba(0,0,0,.18);
     }
     .result-card img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
-      transition: transform .4s cubic-bezier(.2,0,0,1);
+      width: 100%; height: 100%; object-fit: contain; display: block;
     }
-    .result-card:hover img { transform: scale(1.04); }
     .result-overlay {
       position: absolute; inset: 0;
       background: linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.10) 50%, transparent 100%);
@@ -351,6 +350,72 @@
     }
     @media (max-width: 480px) {
       .result-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    }
+
+    /* ── CIRCULAR GALLERY ─────────────── */
+    .circ-wrap {
+      width: 100%; height: 500px;
+      perspective: 2000px;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 52px; position: relative;
+    }
+    .circ-disc {
+      position: relative; width: 100%; height: 100%;
+      transform-style: preserve-3d;
+    }
+    .circ-item {
+      position: absolute;
+      width: 260px; height: 360px;
+      left: 50%; top: 50%;
+      margin-left: -130px; margin-top: -180px;
+      border-radius: var(--r-lg); overflow: hidden;
+      box-shadow: 0 12px 48px rgba(0,0,0,.28);
+      background: var(--dark);
+      transition: opacity .35s linear;
+    }
+    .circ-item img {
+      width: 100%; height: 100%;
+      object-fit: contain; display: block;
+    }
+    .circ-item-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.75) 0%, rgba(0,0,0,.05) 55%, transparent 100%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 18px 16px;
+    }
+    .circ-views {
+      font-family: var(--ff-d);
+      font-size: 30px; font-weight: 700; color: #fff;
+      line-height: 1; letter-spacing: -1px;
+    }
+    .circ-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.5px;
+      color: rgba(255,255,255,.6); margin-top: 3px;
+    }
+    .circ-badge {
+      position: absolute; top: 10px; left: 10px;
+      background: var(--primary); color: #fff;
+      font-size: 10px; font-weight: 700;
+      padding: 3px 9px; border-radius: var(--r-full);
+    }
+    @media (max-width: 768px) {
+      .circ-wrap { height: 420px; }
+      .circ-item { width: 200px; height: 280px; margin-left: -100px; margin-top: -140px; }
+      .circ-views { font-size: 22px; }
+    }
+
+    /* ── 병의원 VIDEO ──────────────── */
+    .video-outer {
+      max-width: 840px; margin: 52px auto 0;
+    }
+    .video-ratio {
+      position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+      border-radius: var(--r-lg);
+      box-shadow: 0 16px 64px rgba(0,0,0,.32);
+    }
+    .video-ratio iframe {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%; border: none; display: block;
     }
 
     /* ── PRICING (canvas) ────────────── */
@@ -539,88 +604,75 @@
       50% { opacity: .25; transform: scale(.45); }
     }
 
-    /* ── TESTIMONIALS (canvas) ───────── */
+    /* ── TESTIMONIALS stagger ──────── */
     #testimonials { overflow: hidden; }
-    .testi-wrap {
-      display: grid; grid-template-columns: 1fr 1.4fr;
-      gap: 60px; align-items: center;
+    .stagger-header { text-align: center; margin-bottom: 8px; }
+    .stagger-header .sec-title { margin-bottom: 0; }
+    .stagger-stage {
+      position: relative; height: 560px;
+      overflow: hidden; margin-top: 40px;
     }
-    .testi-left { position: relative; }
-    .testi-left .eyebrow { margin-bottom: 16px; }
-    .testi-left .sec-title { margin-bottom: 28px; }
-    .testi-desc {
-      font-size: 16px; color: var(--charcoal); line-height: 1.65;
-      margin-bottom: 36px;
-    }
-    .testi-dots {
-      display: flex; gap: 8px; align-items: center;
-    }
-    .testi-dot {
-      width: 8px; height: 8px;
-      border-radius: var(--r-full);
-      background: var(--ash); cursor: pointer;
-      transition: background .3s, width .3s;
-      border: none; padding: 0;
-    }
-    .testi-dot.active {
-      background: var(--primary); width: 24px;
-    }
-    .testi-right {
-      position: relative; height: 280px; overflow: hidden;
-    }
-    .testi-card {
-      position: absolute; inset: 0;
+    .sg-card {
+      position: absolute; left: 50%; top: 50%;
+      width: 340px; height: 340px;
+      padding: 28px 28px 24px;
+      border: 2px solid var(--hairline);
       background: var(--card);
-      border: 1px solid var(--hairline);
-      border-radius: var(--r-lg);
-      padding: 36px 40px;
-      opacity: 0;
-      transform: translateX(60px);
-      transition: opacity .6s cubic-bezier(.2,0,0,1), transform .6s cubic-bezier(.2,0,0,1);
-      pointer-events: none;
-      display: flex; flex-direction: column; justify-content: space-between;
-    }
-    .testi-card.active {
-      opacity: 1; transform: translateX(0);
+      clip-path: polygon(40px 0%,calc(100% - 40px) 0%,100% 40px,100% 100%,calc(100% - 40px) 100%,40px 100%,0 100%,0 0);
+      cursor: pointer;
+      transition: transform .5s cubic-bezier(.2,0,0,1), opacity .5s, background .3s, box-shadow .3s;
+      display: flex; flex-direction: column; gap: 14px;
       pointer-events: auto;
     }
-    .testi-card.exit {
-      opacity: 0; transform: translateX(-60px);
+    .sg-card.is-center {
+      background: var(--primary);
+      border-color: var(--primary);
+      box-shadow: 0 8px 0 4px var(--dark);
+      z-index: 10; cursor: default;
     }
-    .testi-stars {
-      display: flex; gap: 3px; margin-bottom: 18px;
+    .sg-card .sg-cut {
+      position: absolute; top: 38px; right: -2px;
+      width: 58px; height: 2px;
+      background: var(--hairline);
+      transform: rotate(45deg); transform-origin: right center;
     }
-    .testi-stars span {
-      color: #f59e0b; font-size: 16px;
-    }
-    .testi-quote {
-      font-family: var(--ff-d);
-      font-size: 20px; font-weight: 600;
-      line-height: 1.5; letter-spacing: -0.3px;
-      color: var(--ink); margin-bottom: 28px;
-      flex: 1;
-    }
-    .testi-author {
-      display: flex; align-items: center; gap: 14px;
-    }
-    .testi-avatar {
-      width: 44px; height: 44px; border-radius: 50%;
-      background: var(--primary); color: var(--on-primary);
+    .sg-card.is-center .sg-cut { background: var(--primary-deep); }
+    .sg-initial {
+      width: 48px; height: 56px;
+      background: rgba(0,0,0,.08);
       display: flex; align-items: center; justify-content: center;
-      font-family: var(--ff-d); font-size: 18px; font-weight: 700;
-      flex-shrink: 0;
+      font-family: var(--ff-d); font-size: 22px; font-weight: 700;
+      color: var(--ink); flex-shrink: 0;
     }
-    .testi-meta { display: flex; flex-direction: column; }
-    .testi-name {
-      font-size: 15px; font-weight: 700; color: var(--ink);
+    .sg-card.is-center .sg-initial { background: rgba(255,255,255,.18); color: #fff; }
+    .sg-quote {
+      font-size: 15px; font-weight: 600; line-height: 1.55;
+      color: var(--ink); flex: 1;
     }
-    .testi-role { font-size: 13px; color: var(--charcoal); }
-
+    .sg-card.is-center .sg-quote { color: rgba(255,255,255,.95); }
+    .sg-byline {
+      font-size: 12px; color: var(--charcoal);
+      font-style: italic; margin-top: auto;
+    }
+    .sg-card.is-center .sg-byline { color: rgba(255,255,255,.72); }
+    .stagger-nav {
+      position: absolute; bottom: 16px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; gap: 8px; z-index: 20;
+    }
+    .sg-btn {
+      width: 52px; height: 52px;
+      background: var(--card); border: 2px solid var(--hairline);
+      font-size: 18px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--ff-b); font-weight: 700;
+      transition: background .15s, color .15s, border-color .15s;
+      color: var(--ink);
+    }
+    .sg-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
     @media (max-width: 768px) {
-      .testi-wrap { grid-template-columns: 1fr; gap: 32px; }
-      .testi-right { height: 300px; }
-      .testi-card { padding: 24px; }
-      .testi-quote { font-size: 17px; }
+      .stagger-stage { height: 520px; }
+      .sg-card { width: 270px; height: 310px; font-size: 13px; }
     }
 
     /* ── FADE UP ─────────────────────── */
@@ -723,7 +775,7 @@
   <canvas id="hero-canvas"></canvas>
   <div class="hero-content">
     <p class="hero-eyebrow">릴스 · 쇼츠 · 틱톡 전문 대행사</p>
-    <h1 class="hero-title">스크롤을 멈추는 영상, 매출을 만드는 콘텐츠</h1>
+    <h1 class="hero-title">스크롤을 멈추는 영상,<br>매출을 만드는 콘텐츠</h1>
     <p class="hero-sub">기획부터 편집, 업로드까지 — 브랜드에 맞는 숏폼을 데이터 기반으로 운영합니다.</p>
     <div class="hero-btns">
       <a href="https://open.kakao.com/o/s1aWjbAi" target="_blank" class="btn-hero-white">무료 상담 신청</a>
@@ -873,74 +925,13 @@
 <!-- TESTIMONIALS -->
 <section class="sec sec-canvas" id="testimonials">
   <div class="inner">
-    <div class="testi-wrap fade-up">
-      <div class="testi-left">
-        <p class="eyebrow">클라이언트 후기</p>
-        <h2 class="sec-title">실제로 맡겨본<br>대표님들의 이야기</h2>
-        <p class="testi-desc">숫자보다 진짜 현장의 목소리가<br>더 정확한 검증입니다.</p>
-        <div class="testi-dots" id="testi-dots"></div>
-      </div>
-      <div class="testi-right" id="testi-right">
-        <div class="testi-card active" data-index="0">
-          <div>
-            <div class="testi-stars">
-              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-            </div>
-            <p class="testi-quote">"맡기고 나서 팔로워가 3개월 만에 1,200명에서 8,400명으로 늘었어요. 직접 찍을 때랑 퀄리티 차이가 확실합니다."</p>
-          </div>
-          <div class="testi-author">
-            <div class="testi-avatar">김</div>
-            <div class="testi-meta">
-              <span class="testi-name">김○○ 대표</span>
-              <span class="testi-role">뷰티 브랜드 · 인스타그램</span>
-            </div>
-          </div>
-        </div>
-        <div class="testi-card" data-index="1">
-          <div>
-            <div class="testi-stars">
-              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-            </div>
-            <p class="testi-quote">"기획 단계에서 우리 브랜드를 정말 깊이 이해해줘서 놀랐어요. 영상 하나하나가 판매로 이어지는 느낌이 다릅니다."</p>
-          </div>
-          <div class="testi-author">
-            <div class="testi-avatar">박</div>
-            <div class="testi-meta">
-              <span class="testi-name">박○○ 대표</span>
-              <span class="testi-role">식품 브랜드 · 유튜브 쇼츠</span>
-            </div>
-          </div>
-        </div>
-        <div class="testi-card" data-index="2">
-          <div>
-            <div class="testi-stars">
-              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-            </div>
-            <p class="testi-quote">"광고비 100만원 쓸 때랑 효과가 비슷한데, 팔로워는 유지되니까 장기적으로 훨씬 이득이에요. 숫자로 증명해줘서 믿음이 갔어요."</p>
-          </div>
-          <div class="testi-author">
-            <div class="testi-avatar">이</div>
-            <div class="testi-meta">
-              <span class="testi-name">이○○ 이사</span>
-              <span class="testi-role">의료 클리닉 · 틱톡</span>
-            </div>
-          </div>
-        </div>
-        <div class="testi-card" data-index="3">
-          <div>
-            <div class="testi-stars">
-              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-            </div>
-            <p class="testi-quote">"월간 리포트가 너무 좋아요. 어떤 영상이 왜 잘 됐는지 분석해줘서 다음 전략이 명확해집니다."</p>
-          </div>
-          <div class="testi-author">
-            <div class="testi-avatar">최</div>
-            <div class="testi-meta">
-              <span class="testi-name">최○○ 대표</span>
-              <span class="testi-role">인테리어 업체 · 인스타그램</span>
-            </div>
-          </div>
-        </div>
+    <p class="eyebrow fade-up" style="text-align:center">클라이언트 후기</p>
+    <h2 class="sec-title fade-up" style="text-align:center">실제로 맡겨본<br>대표님들의 이야기</h2>
+    <div class="stagger-stage fade-up">
+      <div id="stagger-stage"></div>
+      <div class="stagger-nav">
+        <button class="sg-btn" id="sg-prev">&#8592;</button>
+        <button class="sg-btn" id="sg-next">&#8594;</button>
       </div>
     </div>
   </div>
@@ -1014,41 +1005,61 @@
   </div>
 </section>
 
-<!-- RESULT -->
+<!-- RESULT (circular gallery) -->
 <section class="sec sec-bone" id="portfolio">
   <div class="inner">
     <p class="eyebrow fade-up">실제 성과</p>
     <h2 class="sec-title fade-up">숫자가 증명합니다</h2>
     <p class="sec-sub fade-up">플로우 미디어가 제작한 숏폼의 실제 인사이트 캡처입니다.</p>
-    <div class="result-grid">
-      <div class="result-card fade-up">
-        <img src="성과/179만회.jpeg" alt="조회수 179만회 숏폼 인사이트" loading="lazy">
-        <div class="result-overlay">
-          <div class="result-views">179만</div>
-          <div class="result-label">VIEWS</div>
+    <div class="circ-wrap fade-up">
+      <div class="circ-disc" id="circ-disc">
+        <div class="circ-item" data-angle="0">
+          <img src="성과/179만회.jpeg" alt="조회수 179만회" loading="lazy">
+          <div class="circ-item-overlay">
+            <div class="circ-views">179만</div>
+            <div class="circ-label">VIEWS</div>
+          </div>
+          <span class="circ-badge">최고 기록</span>
         </div>
-        <span class="result-badge">최고 기록</span>
+        <div class="circ-item" data-angle="90">
+          <img src="성과/77만회.jpeg" alt="조회수 77만회" loading="lazy">
+          <div class="circ-item-overlay">
+            <div class="circ-views">77만</div>
+            <div class="circ-label">VIEWS</div>
+          </div>
+        </div>
+        <div class="circ-item" data-angle="180">
+          <img src="성과/74만회.jpeg" alt="조회수 74만회" loading="lazy">
+          <div class="circ-item-overlay">
+            <div class="circ-views">74만</div>
+            <div class="circ-label">VIEWS</div>
+          </div>
+        </div>
+        <div class="circ-item" data-angle="270">
+          <img src="성과/33만회.jpeg" alt="조회수 33만회" loading="lazy">
+          <div class="circ-item-overlay">
+            <div class="circ-views">33만</div>
+            <div class="circ-label">VIEWS</div>
+          </div>
+        </div>
       </div>
-      <div class="result-card fade-up" style="transition-delay:.08s">
-        <img src="성과/77만회.jpeg" alt="조회수 77만회 숏폼 인사이트" loading="lazy">
-        <div class="result-overlay">
-          <div class="result-views">77만</div>
-          <div class="result-label">VIEWS</div>
-        </div>
-      </div>
-      <div class="result-card fade-up" style="transition-delay:.16s">
-        <img src="성과/74만회.jpeg" alt="조회수 74만회 숏폼 인사이트" loading="lazy">
-        <div class="result-overlay">
-          <div class="result-views">74만</div>
-          <div class="result-label">VIEWS</div>
-        </div>
-      </div>
-      <div class="result-card fade-up" style="transition-delay:.24s">
-        <img src="성과/33만회.jpeg" alt="조회수 33만회 숏폼 인사이트" loading="lazy">
-        <div class="result-overlay">
-          <div class="result-views">33만</div>
-          <div class="result-label">VIEWS</div>
-        </div>
+    </div>
+  </div>
+</section>
+
+<!-- 병의원 VIDEO CASE -->
+<section class="sec sec-dark" id="medical-case">
+  <div class="inner">
+    <p class="eyebrow fade-up">병·의원 대표 사례</p>
+    <h2 class="sec-title fade-up" style="color:var(--on-dark)">롱폼 영상으로<br>신뢰를 쌓습니다</h2>
+    <p class="sec-sub fade-up" style="color:var(--on-dark-mute)">인포머셜 형식의 롱폼 영상은 검색 유입과 전문성 확보에 가장 효과적인 포맷입니다.</p>
+    <div class="video-outer fade-up">
+      <div class="video-ratio">
+        <iframe
+          src="https://drive.google.com/file/d/1jMZab5pPfGpDiRK_vso5Xxraw17p0f0I/preview"
+          allow="autoplay"
+          allowfullscreen>
+        </iframe>
       </div>
     </div>
   </div>
@@ -1341,56 +1352,100 @@ void main(void){
   });
 
 
-  /* ── 후기 슬라이더 ── */
-  (function initTestimonials() {
-    const cards = document.querySelectorAll('.testi-card');
-    const dotsWrap = document.getElementById('testi-dots');
-    if (!cards.length || !dotsWrap) return;
+  /* ── Stagger Testimonials ── */
+  (function initStagger() {
+    const data = [
+      { q: '"맡기고 나서 팔로워가 3개월 만에 1,200명에서 8,400명으로 늘었어요. 직접 찍을 때랑 퀄리티 차이가 확실합니다."', name: '김○○ 대표', role: '뷰티 브랜드 · 인스타그램', init: '김' },
+      { q: '"기획 단계에서 우리 브랜드를 깊이 이해해줘서 놀랐어요. 영상 하나하나가 판매로 이어지는 느낌이 다릅니다."', name: '박○○ 대표', role: '전문 서비스 · 유튜브 쇼츠', init: '박' },
+      { q: '"광고비 100만원 쓸 때랑 효과가 비슷한데, 팔로워는 유지되니까 장기적으로 훨씬 이득이에요."', name: '이○○ 이사', role: '의료 클리닉 · 틱톡', init: '이' },
+      { q: '"월간 리포트가 너무 좋아요. 어떤 영상이 왜 잘 됐는지 분석해줘서 다음 전략이 명확해집니다."', name: '최○○ 대표', role: '인테리어 업체 · 인스타그램', init: '최' },
+      { q: '"처음엔 반신반의했는데 첫 달부터 조회수가 폭발적으로 올라서 깜짝 놀랐어요. 정말 전문가들이에요."', name: '정○○ 대표', role: '교육 서비스 · 유튜브 쇼츠', init: '정' }
+    ];
+    const stage = document.getElementById('stagger-stage');
+    const prevBtn = document.getElementById('sg-prev');
+    const nextBtn = document.getElementById('sg-next');
+    if (!stage) return;
 
-    let current = 0;
-    let timer = null;
+    const isMobile = () => window.innerWidth < 640;
+    let cur = 0;
+    const n = data.length;
+    const VISIBLE = 2;
 
-    const dots = Array.from({ length: cards.length }, (_, i) => {
-      const btn = document.createElement('button');
-      btn.className = 'testi-dot' + (i === 0 ? ' active' : '');
-      btn.setAttribute('aria-label', `후기 ${i + 1}`);
-      btn.addEventListener('click', () => goTo(i));
-      dotsWrap.appendChild(btn);
-      return btn;
+    function cardW() { return isMobile() ? 260 : 330; }
+    function cardH() { return isMobile() ? 300 : 330; }
+
+    function render() {
+      stage.innerHTML = '';
+      const CW = cardW(), CH = cardH(), GAP = CW / 1.55;
+      for (let off = -VISIBLE; off <= VISIBLE; off++) {
+        const idx = ((cur + off) % n + n) % n;
+        const d = data[idx];
+        const isCenter = off === 0;
+        const absOff = Math.abs(off);
+        const opacity = absOff === 0 ? 1 : absOff === 1 ? 0.72 : 0.38;
+        const tx = GAP * off;
+        const ty = isCenter ? -72 : off % 2 !== 0 ? 12 : -12;
+        const rot = isCenter ? 0 : (off > 0 ? 2.5 : -2.5);
+
+        const card = document.createElement('div');
+        card.className = 'sg-card' + (isCenter ? ' is-center' : '');
+        card.style.cssText = [
+          `width:${CW}px`, `height:${CH}px`,
+          `transform:translate(-50%,-50%) translateX(${tx}px) translateY(${ty}px) rotate(${rot}deg)`,
+          `opacity:${opacity}`, `z-index:${10 - absOff}`
+        ].join(';');
+
+        if (!isCenter) card.addEventListener('click', () => { cur = ((cur + off) % n + n) % n; render(); });
+
+        card.innerHTML = `
+          <span class="sg-cut"></span>
+          <div class="sg-initial">${d.init}</div>
+          <p class="sg-quote">${d.q}</p>
+          <p class="sg-byline">— ${d.name}, ${d.role}</p>`;
+        stage.appendChild(card);
+      }
+    }
+
+    prevBtn?.addEventListener('click', () => { cur = ((cur - 1) + n) % n; render(); });
+    nextBtn?.addEventListener('click', () => { cur = (cur + 1) % n; render(); });
+    render();
+    window.addEventListener('resize', render);
+  })();
+
+  /* ── Circular Gallery ── */
+  (function initCircGallery() {
+    const disc = document.getElementById('circ-disc');
+    if (!disc) return;
+    const items = disc.querySelectorAll('.circ-item');
+    const RADIUS = window.innerWidth < 768 ? 320 : 500;
+
+    items.forEach(item => {
+      const angle = parseFloat(item.dataset.angle) || 0;
+      item.style.transform = `rotateY(${angle}deg) translateZ(${RADIUS}px)`;
     });
 
-    function goTo(next) {
-      if (next === current) return;
-      cards[current].classList.remove('active');
-      cards[current].classList.add('exit');
-      const prev = current;
-      setTimeout(() => cards[prev].classList.remove('exit'), 650);
-      dots[current].classList.remove('active');
-      current = next;
-      cards[current].classList.add('active');
-      dots[current].classList.add('active');
-      resetTimer();
-    }
+    let rotation = 0;
+    let active = true;
 
-    function advance() { goTo((current + 1) % cards.length); }
+    const obs = new IntersectionObserver(entries => {
+      active = entries[0].isIntersecting;
+    }, { threshold: 0.1 });
+    obs.observe(disc.closest('section') || disc);
 
-    function resetTimer() {
-      clearInterval(timer);
-      timer = setInterval(advance, 6000);
-    }
-
-    const section = document.getElementById('testimonials');
-    if (section) {
-      const sectionObs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) { resetTimer(); }
-          else { clearInterval(timer); }
+    function tick() {
+      if (active) {
+        rotation += 0.018;
+        disc.style.transform = `rotateY(${rotation}deg)`;
+        items.forEach(item => {
+          const angle = parseFloat(item.dataset.angle) || 0;
+          let rel = ((angle + rotation) % 360 + 360) % 360;
+          if (rel > 180) rel = 360 - rel;
+          item.style.opacity = Math.max(0.22, 1 - rel / 180);
         });
-      }, { threshold: 0.3 });
-      sectionObs.observe(section);
-    } else {
-      resetTimer();
+      }
+      requestAnimationFrame(tick);
     }
+    requestAnimationFrame(tick);
   })();
 </script>
 </body>
