@@ -4,6 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>플로우 미디어 — 숏폼 영상 대행</title>
+  <link rel="icon" href="로고 엠블럼.png">
+  <link rel="apple-touch-icon" href="로고 엠블럼.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="플로우 미디어 — 숏폼 영상 대행">
+  <meta property="og:description" content="기획부터 편집, 업로드까지. 브랜드에 맞는 숏폼을 데이터 기반으로 운영합니다.">
+  <meta property="og:image" content="https://flowmedia-three.vercel.app/링크 공유용 배너.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="플로우 미디어 — 숏폼 영상 대행">
+  <meta name="twitter:image" content="https://flowmedia-three.vercel.app/링크 공유용 배너.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
@@ -16,11 +27,11 @@
       --card:         #ffffff;
       --dark:         #202020;
       --deep:         #000000;
-      --primary:      #ea2804;
-      --primary-deep: #c01f00;
-      --hero-glow:    #ff6a3d;
-      --hero-pink:    #f4a8a0;
-      --on-primary:   #ffffff;
+      --primary:      #beff0f;
+      --primary-deep: #9dcc00;
+      --hero-glow:    #beff0f;
+      --hero-pink:    #dcff80;
+      --on-primary:   #0a0a0a;
       --ink:          #202020;
       --body-c:       #3a3a3a;
       --charcoal:     #575757;
@@ -63,8 +74,10 @@
     .logo {
       font-family: var(--ff-d); font-size: 20px; font-weight: 700;
       letter-spacing: -0.5px; color: var(--ink); text-decoration: none;
+      display: flex; align-items: center; gap: 10px;
     }
     .logo em { font-style: normal; color: var(--primary); }
+    .logo-emblem { height: 28px; width: 28px; object-fit: cover; border-radius: 4px; }
     nav ul { list-style: none; display: flex; gap: 28px; }
     nav ul a {
       text-decoration: none; color: var(--charcoal);
@@ -118,7 +131,7 @@
       font-family: var(--ff-d);
       font-size: clamp(44px, 6.5vw, 80px);
       font-weight: 700; line-height: 1.12; letter-spacing: -2.5px;
-      color: var(--on-primary); margin-bottom: 28px; max-width: 800px;
+      color: #fff; margin-bottom: 28px; max-width: 800px;
       word-break: keep-all;
     }
     .hero-sub {
@@ -127,7 +140,7 @@
     }
     .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-bottom: 64px; }
     .btn-hero-white {
-      background: var(--on-primary); color: var(--primary);
+      background: var(--primary); color: var(--on-primary);
       padding: 14px 32px; border-radius: var(--r-full);
       font-size: 16px; font-weight: 700; text-decoration: none;
       height: 52px; display: inline-flex; align-items: center;
@@ -135,7 +148,7 @@
     }
     .btn-hero-white:hover { opacity: .9; transform: translateY(-2px); }
     .btn-hero-ghost {
-      background: transparent; color: var(--on-primary);
+      background: transparent; color: rgba(255,255,255,.9);
       padding: 14px 32px; border-radius: var(--r-full);
       font-size: 16px; font-weight: 600; text-decoration: none;
       border: 1.5px solid rgba(255,255,255,.45);
@@ -325,6 +338,11 @@
       overflow: hidden; border-radius: var(--r-md);
       background: var(--dark); cursor: pointer;
     }
+    .vid-drive-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(160deg, #1a1a1a 0%, #0a0a0a 100%);
+    }
     .vid-thumb img {
       width: 100%; height: 100%;
       object-fit: cover; display: block;
@@ -350,7 +368,7 @@
     .vid-thumb:hover .vid-play-btn { transform: scale(1.12); }
     .vid-cat-label {
       position: absolute; bottom: 10px; left: 10px;
-      background: var(--primary); color: #fff;
+      background: var(--primary); color: var(--on-primary);
       font-size: 10px; font-weight: 700; letter-spacing: 0.3px;
       padding: 3px 9px; border-radius: var(--r-full);
     }
@@ -410,7 +428,7 @@
     .perf-unit { font-size: 13px; font-weight: 600; color: rgba(255,255,255,.55); }
     .perf-badge {
       margin-left: auto;
-      background: var(--primary); color: #fff;
+      background: var(--primary); color: var(--on-primary);
       font-size: 10px; font-weight: 700;
       padding: 3px 9px; border-radius: var(--r-full);
     }
@@ -662,17 +680,17 @@
       font-family: var(--ff-d); font-size: 22px; font-weight: 700;
       color: var(--ink); flex-shrink: 0;
     }
-    .sg-card.is-center .sg-initial { background: rgba(255,255,255,.18); color: #fff; }
+    .sg-card.is-center .sg-initial { background: rgba(0,0,0,.12); color: var(--on-primary); }
     .sg-quote {
       font-size: 15px; font-weight: 600; line-height: 1.55;
       color: var(--ink); flex: 1;
     }
-    .sg-card.is-center .sg-quote { color: rgba(255,255,255,.95); }
+    .sg-card.is-center .sg-quote { color: rgba(10,10,10,.9); }
     .sg-byline {
       font-size: 12px; color: var(--charcoal);
       font-style: italic; margin-top: auto;
     }
-    .sg-card.is-center .sg-byline { color: rgba(255,255,255,.72); }
+    .sg-card.is-center .sg-byline { color: rgba(10,10,10,.65); }
     .stagger-nav {
       position: absolute; bottom: 16px; left: 50%;
       transform: translateX(-50%);
@@ -687,7 +705,7 @@
       transition: background .15s, color .15s, border-color .15s;
       color: var(--ink);
     }
-    .sg-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .sg-btn:hover { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
     @media (max-width: 768px) {
       .stagger-stage { height: 520px; }
       .sg-card { width: 270px; height: 310px; font-size: 13px; }
@@ -777,7 +795,7 @@
 
 <!-- NAV -->
 <nav>
-  <a class="logo" href="#">플로우<em>미디어</em></a>
+  <a class="logo" href="#"><img src="로고 엠블럼.png" class="logo-emblem" alt="">플로우<em>미디어</em></a>
   <ul>
     <li><a href="#why-shortform">왜 숏폼인가</a></li>
     <li><a href="#service">서비스</a></li>
@@ -792,7 +810,7 @@
 <section id="hero">
   <canvas id="hero-canvas"></canvas>
   <div class="hero-content">
-    <p class="hero-eyebrow">릴스 · 쇼츠 · 틱톡 전문 대행사</p>
+    <p class="hero-eyebrow">릴스 · 쇼츠 · 유튜브 전문 대행사</p>
     <h1 class="hero-title">스크롤을 멈추는 영상,<br>매출을 만드는 콘텐츠</h1>
     <p class="hero-sub">기획부터 편집, 업로드까지 — 브랜드에 맞는 숏폼을 데이터 기반으로 운영합니다.</p>
     <div class="hero-btns">
@@ -802,7 +820,7 @@
     <div class="platform-row">
       <span class="platform-pill">YouTube Shorts</span>
       <span class="platform-pill">Instagram Reels</span>
-      <span class="platform-pill">TikTok</span>
+      <span class="platform-pill">YouTube</span>
     </div>
   </div>
 </section>
@@ -1009,6 +1027,62 @@
           <span class="vid-cat-label">전문직</span>
         </div>
       </div>
+      <div class="vid-card" data-cat="전문직">
+        <div class="vid-thumb" data-drive-src="https://drive.google.com/file/d/1jMZab5pPfGpDiRK_vso5Xxraw17p0f0I/preview">
+          <div class="vid-drive-placeholder">
+            <div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <span class="vid-cat-label">전문직</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 성과 (실제 인사이트 캡처) -->
+<section class="sec sec-canvas" id="results">
+  <div class="inner">
+    <p class="eyebrow fade-up">실제 성과</p>
+    <h2 class="sec-title fade-up">직접 찍은 인사이트</h2>
+    <p class="sec-sub fade-up">플로우 미디어가 제작한 숏폼의 실제 플랫폼 인사이트 캡처입니다.</p>
+    <div class="perf-grid">
+      <div class="perf-card fade-up">
+        <div class="perf-img-wrap">
+          <img src="성과/179만회.jpeg" alt="조회수 179만회" loading="lazy">
+        </div>
+        <div class="perf-label">
+          <span class="perf-views">179만</span>
+          <span class="perf-unit">조회수</span>
+          <span class="perf-badge">최고 기록</span>
+        </div>
+      </div>
+      <div class="perf-card fade-up" style="transition-delay:.08s">
+        <div class="perf-img-wrap">
+          <img src="성과/77만회.jpeg" alt="조회수 77만회" loading="lazy">
+        </div>
+        <div class="perf-label">
+          <span class="perf-views">77만</span>
+          <span class="perf-unit">조회수</span>
+        </div>
+      </div>
+      <div class="perf-card fade-up" style="transition-delay:.16s">
+        <div class="perf-img-wrap">
+          <img src="성과/74만회.jpeg" alt="조회수 74만회" loading="lazy">
+        </div>
+        <div class="perf-label">
+          <span class="perf-views">74만</span>
+          <span class="perf-unit">조회수</span>
+        </div>
+      </div>
+      <div class="perf-card fade-up" style="transition-delay:.24s">
+        <div class="perf-img-wrap">
+          <img src="성과/33만회.jpeg" alt="조회수 33만회" loading="lazy">
+        </div>
+        <div class="perf-label">
+          <span class="perf-views">33만</span>
+          <span class="perf-unit">조회수</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1083,7 +1157,7 @@
       <div class="service-card fade-up" style="transition-delay:.18s">
         <div class="s-icon">📤</div>
         <h4>최적화 업로드</h4>
-        <p>릴스/쇼츠/틱톡 각 플랫폼 최적화 + 해시태그 세팅</p>
+        <p>릴스/쇼츠/유튜브 각 플랫폼 최적화 + 해시태그 세팅</p>
       </div>
       <div class="service-card fade-up" style="transition-delay:.24s">
         <div class="s-icon">📊</div>
@@ -1127,72 +1201,6 @@
   </div>
 </section>
 
-<!-- 성과 (실제 인사이트 캡처) -->
-<section class="sec sec-canvas" id="results">
-  <div class="inner">
-    <p class="eyebrow fade-up">실제 성과</p>
-    <h2 class="sec-title fade-up">직접 찍은 인사이트</h2>
-    <p class="sec-sub fade-up">플로우 미디어가 제작한 숏폼의 실제 플랫폼 인사이트 캡처입니다.</p>
-    <div class="perf-grid">
-      <div class="perf-card fade-up">
-        <div class="perf-img-wrap">
-          <img src="성과/179만회.jpeg" alt="조회수 179만회" loading="lazy">
-        </div>
-        <div class="perf-label">
-          <span class="perf-views">179만</span>
-          <span class="perf-unit">조회수</span>
-          <span class="perf-badge">최고 기록</span>
-        </div>
-      </div>
-      <div class="perf-card fade-up" style="transition-delay:.08s">
-        <div class="perf-img-wrap">
-          <img src="성과/77만회.jpeg" alt="조회수 77만회" loading="lazy">
-        </div>
-        <div class="perf-label">
-          <span class="perf-views">77만</span>
-          <span class="perf-unit">조회수</span>
-        </div>
-      </div>
-      <div class="perf-card fade-up" style="transition-delay:.16s">
-        <div class="perf-img-wrap">
-          <img src="성과/74만회.jpeg" alt="조회수 74만회" loading="lazy">
-        </div>
-        <div class="perf-label">
-          <span class="perf-views">74만</span>
-          <span class="perf-unit">조회수</span>
-        </div>
-      </div>
-      <div class="perf-card fade-up" style="transition-delay:.24s">
-        <div class="perf-img-wrap">
-          <img src="성과/33만회.jpeg" alt="조회수 33만회" loading="lazy">
-        </div>
-        <div class="perf-label">
-          <span class="perf-views">33만</span>
-          <span class="perf-unit">조회수</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 병의원 VIDEO CASE -->
-<section class="sec sec-dark" id="medical-case">
-  <div class="inner">
-    <p class="eyebrow fade-up">병·의원 대표 사례</p>
-    <h2 class="sec-title fade-up" style="color:var(--on-dark)">롱폼 영상으로<br>신뢰를 쌓습니다</h2>
-    <p class="sec-sub fade-up" style="color:var(--on-dark-mute)">인포머셜 형식의 롱폼 영상은 검색 유입과 전문성 확보에 가장 효과적인 포맷입니다.</p>
-    <div class="video-outer fade-up">
-      <div class="video-ratio">
-        <iframe
-          src="https://drive.google.com/file/d/1jMZab5pPfGpDiRK_vso5Xxraw17p0f0I/preview"
-          allow="autoplay"
-          allowfullscreen>
-        </iframe>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- PRICING -->
 <section class="sec sec-canvas" id="pricing">
   <div class="inner">
@@ -1204,7 +1212,7 @@
       <div class="pricing-cards">
         <div class="pricing-card fade-up">
           <h3>숏폼 단건</h3>
-          <p class="p-includes">릴스 · 쇼츠 · 틱톡 중 선택<br>기획 + 편집 + 업로드 포함</p>
+          <p class="p-includes">릴스 · 쇼츠 · 유튜브 중 선택<br>기획 + 편집 + 업로드 포함</p>
           <div><span class="p-price">25</span><span class="p-unit">만원 / 1편</span></div>
           <p class="p-note">필요할 때 단건으로 주문 가능</p>
           <ul class="p-features">
@@ -1242,7 +1250,7 @@
           <ul class="p-features">
             <li>롱폼 기획 + 편집 2편</li>
             <li>파생 숏폼 4편</li>
-            <li>유튜브 + 릴스/쇼츠/틱톡 업로드</li>
+            <li>유튜브 + 릴스/쇼츠 업로드</li>
             <li>썸네일 디자인 포함</li>
           </ul>
         </div>
@@ -1255,7 +1263,7 @@
           <ul class="p-features">
             <li>롱폼 기획 + 편집 3편</li>
             <li>파생 숏폼 6편</li>
-            <li>유튜브 + 릴스/쇼츠/틱톡 업로드</li>
+            <li>유튜브 + 릴스/쇼츠 업로드</li>
             <li>썸네일 디자인 포함</li>
             <li>월간 성과 리포트</li>
           </ul>
@@ -1311,7 +1319,7 @@
   <div class="footer-inner">
     <div class="footer-brand">
       <span class="f-logo">플로우<em>미디어</em></span>
-      <p>릴스 · 쇼츠 · 틱톡<br>숏폼 영상 전문 대행사</p>
+      <p>릴스 · 쇼츠 · 유튜브<br>숏폼 영상 전문 대행사</p>
     </div>
     <div class="f-col">
       <h5>서비스</h5>
@@ -1349,7 +1357,7 @@
 </div>
 
 <script>
-  /* ── WebGL 셰이더 히어로 (Matthias Hurrle @atzedent) ── */
+  /* ── WebGL 셰이더 히어로 (concentric ring) ── */
   (function initShader() {
     const canvas = document.getElementById('hero-canvas');
     if (!canvas) return;
@@ -1366,29 +1374,17 @@ precision highp float;
 out vec4 O;
 uniform vec2 resolution;
 uniform float time;
-#define FC gl_FragCoord.xy
-#define T time
-#define R resolution
-#define MN min(R.x,R.y)
-float rnd(vec2 p){p=fract(p*vec2(12.9898,78.233));p+=dot(p,p+34.56);return fract(p.x*p.y);}
-float noise(in vec2 p){vec2 i=floor(p),f=fract(p),u=f*f*(3.-2.*f);float a=rnd(i),b=rnd(i+vec2(1,0)),c=rnd(i+vec2(0,1)),d=rnd(i+1.);return mix(mix(a,b,u.x),mix(c,d,u.x),u.y);}
-float fbm(vec2 p){float t=.0,a=1.;mat2 m=mat2(1.,-.5,.2,1.2);for(int i=0;i<5;i++){t+=a*noise(p);p*=2.*m;a*=.5;}return t;}
-float clouds(vec2 p){float d=1.,t=.0;for(float i=.0;i<3.;i++){float a=d*fbm(i*10.+p.x*.2+.2*(1.+i)*p.y+d+i*i+p);t=mix(t,d,a);d=a;p*=2./(i+1.);}return t;}
-void main(void){
-  vec2 uv=(FC-.5*R)/MN,st=uv*vec2(2,1);
-  vec3 col=vec3(0);
-  float bg=clouds(vec2(st.x+T*.5,-st.y));
-  uv*=1.-.3*(sin(T*.2)*.5+.5);
-  for(float i=1.;i<12.;i++){
-    uv+=.1*cos(i*vec2(.1+.01*i,.8)+i*i+T*.5+.1*uv.x);
-    vec2 p=uv;
-    float d=length(p);
-    col+=.00125/d*(cos(sin(i)*vec3(1,2,3))+1.);
-    float b=noise(i+p+bg*1.731);
-    col+=.002*b/length(max(p,vec2(b*p.x*.02,p.y)));
-    col=mix(col,vec3(bg*.25,bg*.137,bg*.05),d);
+void main(void) {
+  vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
+  float t = time * 0.05;
+  float lineWidth = 0.002;
+  vec3 color = vec3(0.0);
+  for(int j = 0; j < 3; j++){
+    for(int i = 0; i < 5; i++){
+      color[j] += lineWidth * float(i*i) / abs(fract(t - 0.01*float(j) + float(i)*0.01)*5.0 - length(uv) + mod(uv.x + uv.y, 0.2));
+    }
   }
-  O=vec4(col,1);
+  O = vec4(color[0], color[1], color[2], 1.0);
 }`;
 
     function mkShader(type, src) {
@@ -1485,7 +1481,7 @@ void main(void){
     const data = [
       { q: '"맡기고 나서 팔로워가 3개월 만에 1,200명에서 8,400명으로 늘었어요. 직접 찍을 때랑 퀄리티 차이가 확실합니다."', name: '김○○ 대표', role: '뷰티 브랜드 · 인스타그램', init: '김' },
       { q: '"기획 단계에서 우리 브랜드를 깊이 이해해줘서 놀랐어요. 영상 하나하나가 판매로 이어지는 느낌이 다릅니다."', name: '박○○ 대표', role: '전문 서비스 · 유튜브 쇼츠', init: '박' },
-      { q: '"광고비 100만원 쓸 때랑 효과가 비슷한데, 팔로워는 유지되니까 장기적으로 훨씬 이득이에요."', name: '이○○ 이사', role: '의료 클리닉 · 틱톡', init: '이' },
+      { q: '"광고비 100만원 쓸 때랑 효과가 비슷한데, 팔로워는 유지되니까 장기적으로 훨씬 이득이에요."', name: '이○○ 이사', role: '의료 클리닉 · 유튜브', init: '이' },
       { q: '"월간 리포트가 너무 좋아요. 어떤 영상이 왜 잘 됐는지 분석해줘서 다음 전략이 명확해집니다."', name: '최○○ 대표', role: '인테리어 업체 · 인스타그램', init: '최' },
       { q: '"처음엔 반신반의했는데 첫 달부터 조회수가 폭발적으로 올라서 깜짝 놀랐어요. 정말 전문가들이에요."', name: '정○○ 대표', role: '교육 서비스 · 유튜브 쇼츠', init: '정' }
     ];
@@ -1572,8 +1568,13 @@ void main(void){
           if (f) f.remove();
         });
         const iframe = document.createElement('iframe');
-        iframe.src = `https://www.youtube.com/embed/${this.dataset.id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
-        iframe.allow = 'autoplay; fullscreen; encrypted-media; picture-in-picture';
+        if (this.dataset.driveSrc) {
+          iframe.src = this.dataset.driveSrc;
+          iframe.allow = 'autoplay; fullscreen';
+        } else {
+          iframe.src = `https://www.youtube.com/embed/${this.dataset.id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+          iframe.allow = 'autoplay; fullscreen; encrypted-media; picture-in-picture';
+        }
         iframe.allowFullscreen = true;
         this.appendChild(iframe);
         this.classList.add('playing');
