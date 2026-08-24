@@ -464,7 +464,7 @@
     }
     .vid-grid {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 12px;
     }
     .vid-card { display: flex; flex-direction: column; }
@@ -518,13 +518,7 @@
       width: 100%; height: 100%; border: none; display: none;
     }
     .vid-thumb.playing iframe { display: block; }
-    @media (max-width: 1024px) {
-      .vid-grid { grid-template-columns: repeat(4, 1fr); }
-    }
     @media (max-width: 768px) {
-      .vid-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
-    }
-    @media (max-width: 480px) {
       .vid-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
     }
 
