@@ -1,0 +1,32 @@
+name: 노하우 예약 발행
+
+# 매일 00:05 KST 에 빌드해서, 날짜가 된 글이 있으면 커밋 → Vercel 자동 배포
+on:
+  schedule:
+    - cron: "5 15 * * *"   # 15:05 UTC = 00:05 KST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build knowhow
+        run: python3 tools/build_knowhow.py
+      - name: Commit if changed
+        run: |
+          git config user.name "flowmedia-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add knowhow sitemap.xml
+          if git diff --cached --quiet; then
+            echo "새로 공개할 글 없음"
+          else
+            git commit -m "노하우 예약 발행 $(TZ=Asia/Seoul date +%F)"
+            git push
+          fi

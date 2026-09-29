@@ -73,14 +73,14 @@
               "@type": "Offer",
               "name": "숏폼 단건",
               "description": "릴스·쇼츠·유튜브 중 선택. 기획+편집+업로드 포함",
-              "price": "250000",
+              "price": "300000",
               "priceCurrency": "KRW"
             },
             {
               "@type": "Offer",
               "name": "숏폼 10편 패키지",
               "description": "월 운영 패키지. 콘텐츠 캘린더 + 스크립트 + 편집 + 3개 플랫폼 업로드",
-              "price": "2000000",
+              "price": "2500000",
               "priceCurrency": "KRW"
             }
           ]
@@ -94,7 +94,7 @@
             "name": "촬영 장비는 직접 준비해야 하나요?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "아닙니다. 플로우 미디어가 전문 장비를 지참해 현장 촬영을 진행합니다. 고객사에서 보유한 영상 소스가 있다면 그것을 활용해도 됩니다."
+              "text": "아닙니다. 플로우 미디어 내부 감독과 PD가 자체 보유한 촬영장비를 지참해 현장에서 직접 촬영하고 편집합니다. 고객사에서 보유한 영상 소스가 있다면 그것을 활용해도 됩니다."
             }
           },
           {
@@ -133,6 +133,71 @@
       }
     ]
   }
+  </script>
+  <!-- 네이버 캐러셀 (ItemList) -->
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "ItemList",
+  "name": "플로우미디어 숏폼 영상 대행 서비스",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": "1",
+      "item": {
+        "@type": "Service",
+        "name": "플로우미디어 숏폼대행",
+        "description": "기획·촬영·편집·업로드 원스톱",
+        "image": "https://flowmedia-three.vercel.app/carousel/01-shortform.jpg",
+        "url": "https://flowmedia-three.vercel.app/#service"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": "2",
+      "item": {
+        "@type": "Service",
+        "name": "플로우미디어 릴스대행",
+        "description": "스크롤을 멈추는 인스타 릴스 제작",
+        "image": "https://flowmedia-three.vercel.app/carousel/02-reels.jpg",
+        "url": "https://flowmedia-three.vercel.app/#portfolio"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": "3",
+      "item": {
+        "@type": "Service",
+        "name": "플로우미디어 쇼츠대행",
+        "description": "유튜브 쇼츠 기획부터 업로드까지",
+        "image": "https://flowmedia-three.vercel.app/carousel/03-shorts.jpg",
+        "url": "https://flowmedia-three.vercel.app/#process"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": "4",
+      "item": {
+        "@type": "Service",
+        "name": "플로우미디어 유튜브대행",
+        "description": "롱폼 + 파생 숏폼 채널 운영",
+        "image": "https://flowmedia-three.vercel.app/carousel/04-youtube.jpg",
+        "url": "https://flowmedia-three.vercel.app/#pricing"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": "5",
+      "item": {
+        "@type": "Service",
+        "name": "플로우미디어 전문직 숏폼",
+        "description": "11년차 마케터 기획 · 내부 감독·PD 직접 촬영",
+        "image": "https://flowmedia-three.vercel.app/carousel/05-professional.jpg",
+        "url": "https://flowmedia-three.vercel.app/#why-us"
+      }
+    }
+  ]
+}
   </script>
   <!-- Meta Pixel Code -->
   <script>
@@ -448,6 +513,29 @@
     }
     .proc-banner strong em { font-style: normal; color: var(--primary); }
 
+    /* ── 서비스 바로가기 (캐러셀) ── */
+    .kw-row {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 40px;
+    }
+    .kw-card {
+      position: relative; display: block; border-radius: var(--r-lg); overflow: hidden;
+      border: 1px solid var(--hairline); text-decoration: none;
+      transition: transform .25s cubic-bezier(.2,0,0,1), border-color .25s;
+    }
+    .kw-card:hover { transform: translateY(-4px); border-color: rgba(190,255,15,.5); }
+    .kw-card img { width: 100%; height: auto; display: block; aspect-ratio: 1/1; object-fit: cover; }
+    .kw-name {
+      position: absolute; left: 0; right: 0; bottom: 0; padding: 10px 12px;
+      font-size: 13px; font-weight: 700; color: var(--on-dark);
+      background: linear-gradient(transparent, rgba(0,0,0,.75));
+    }
+    @media (max-width: 1024px) {
+      .kw-row { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 42%;
+        overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; }
+      .kw-card { scroll-snap-align: start; }
+    }
+    @media (max-width: 640px) { .kw-row { grid-auto-columns: 72%; } }
+
     /* ── VIDEO PORTFOLIO (bone) ───────── */
     .vid-filters {
       display: flex; gap: 8px; flex-wrap: wrap;
@@ -518,11 +606,28 @@
       width: 100%; height: 100%; border: none; display: none;
     }
     .vid-thumb.playing iframe { display: block; }
+    .vid-card.vid-over { display: none !important; }
+    .vid-more-wrap { text-align: center; margin-top: 32px; }
+    .vid-more {
+      display: inline-block; padding: 12px 28px; border-radius: var(--r-full);
+      border: 1px solid var(--hairline-s); color: var(--ink);
+      font-size: 14px; font-weight: 700; text-decoration: none; transition: all .15s;
+    }
+    .vid-more:hover { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+    .vid-long { margin-top: 40px; }
+    .vid-long-label {
+      font-size: 13px; font-weight: 700; color: var(--charcoal);
+      margin-bottom: 14px;
+    }
+    .vid-grid--long { grid-template-columns: repeat(3, 1fr); }
+    .vid-thumb--wide { aspect-ratio: 16/9; }
     @media (max-width: 1024px) {
       .vid-grid { grid-template-columns: repeat(4, 1fr); }
     }
     @media (max-width: 768px) {
       .vid-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+
+      .vid-grid--long { grid-template-columns: 1fr; }
     }
 
     /* ── 성과 (canvas) ─────────────── */
@@ -938,6 +1043,7 @@
     <li><a href="#portfolio">포트폴리오</a></li>
     <li><a href="#pricing">요금제</a></li>
     <li><a href="#faq">FAQ</a></li>
+    <li><a href="knowhow/">노하우</a></li>
   </ul>
   <a href="https://open.kakao.com/me/flowmedia" target="_blank" class="nav-cta">무료 상담</a>
 </nav>
@@ -1001,6 +1107,36 @@
 
   </div>
 </div>
+
+<!-- 서비스 바로가기 (네이버 캐러셀 항목과 동일) -->
+<section class="sec sec-canvas" id="services-quick">
+  <div class="inner">
+    <p class="eyebrow fade-up">서비스 바로가기</p>
+    <h2 class="sec-title fade-up">숏폼대행 · 릴스대행 · 쇼츠대행 · 유튜브대행</h2>
+    <div class="kw-row fade-up">
+      <a class="kw-card" href="#service">
+        <img src="carousel/01-shortform.jpg" alt="플로우미디어 숏폼대행 - 기획·촬영·편집·업로드 원스톱" width="1080" height="1080" loading="lazy">
+        <span class="kw-name">숏폼대행</span>
+      </a>
+      <a class="kw-card" href="#portfolio">
+        <img src="carousel/02-reels.jpg" alt="플로우미디어 릴스대행 - 스크롤을 멈추는 인스타 릴스 제작" width="1080" height="1080" loading="lazy">
+        <span class="kw-name">릴스대행</span>
+      </a>
+      <a class="kw-card" href="#process">
+        <img src="carousel/03-shorts.jpg" alt="플로우미디어 쇼츠대행 - 유튜브 쇼츠 기획부터 업로드까지" width="1080" height="1080" loading="lazy">
+        <span class="kw-name">쇼츠대행</span>
+      </a>
+      <a class="kw-card" href="#pricing">
+        <img src="carousel/04-youtube.jpg" alt="플로우미디어 유튜브대행 - 롱폼 + 파생 숏폼 채널 운영" width="1080" height="1080" loading="lazy">
+        <span class="kw-name">유튜브대행</span>
+      </a>
+      <a class="kw-card" href="#why-us">
+        <img src="carousel/05-professional.jpg" alt="플로우미디어 전문직 숏폼 - 11년차 마케터 기획 · 내부 감독·PD 직접 촬영" width="1080" height="1080" loading="lazy">
+        <span class="kw-name">전문직 숏폼</span>
+      </a>
+    </div>
+  </div>
+</section>
 
 <!-- PROBLEM -->
 <section class="sec sec-bone" id="problem">
@@ -1076,8 +1212,100 @@
       <button class="vid-filter" data-filter="반려동물">반려동물</button>
       <button class="vid-filter" data-filter="생활용품">생활용품</button>
       <button class="vid-filter" data-filter="여행">여행</button>
+      <button class="vid-filter" data-filter="외식">외식</button>
     </div>
     <div class="vid-grid fade-up">
+      <div class="vid-card" data-cat="전문직">
+        <div class="vid-thumb" data-id="TW68fUT6e6c">
+          <img src="https://img.youtube.com/vi/TW68fUT6e6c/hqdefault.jpg" alt="건축사 숏폼" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">전문직</span>
+        </div>
+      </div>
+      <div class="vid-card" data-cat="전문직">
+        <div class="vid-thumb" data-id="CZJjd8KePYE">
+          <img src="https://img.youtube.com/vi/CZJjd8KePYE/hqdefault.jpg" alt="건축사 숏폼" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">전문직</span>
+        </div>
+      </div>
+      <div class="vid-card" data-cat="전문직">
+        <div class="vid-thumb" data-id="wqdOdlOMh7s">
+          <img src="https://img.youtube.com/vi/wqdOdlOMh7s/hqdefault.jpg" alt="건축사 숏폼" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">전문직</span>
+        </div>
+      </div>
+      <div class="vid-card" data-cat="생활용품">
+        <div class="vid-thumb" data-ig="DdtMh8tABFF">
+          <img src="portfolio/ig_DdtMh8tABFF.jpg" alt="베드기어 릴스" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">생활용품</span>
+        </div>
+      </div>
+      <div class="vid-card" data-cat="생활용품">
+        <div class="vid-thumb" data-ig="DdoDCImF_rD">
+          <img src="portfolio/ig_DdoDCImF_rD.jpg" alt="베드기어 릴스" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">생활용품</span>
+        </div>
+      </div>
+      <div class="vid-card" data-cat="외식">
+        <div class="vid-thumb" data-ig="Dds-wB_BFIG">
+          <img src="portfolio/ig_Dds-wB_BFIG.jpg" alt="평창한우마을 릴스" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">외식</span>
+        </div>
+      </div>
+      <div class="vid-card" data-cat="외식">
+        <div class="vid-thumb" data-ig="DdlQXdOBxwL">
+          <img src="portfolio/ig_DdlQXdOBxwL.jpg" alt="평창한우마을 릴스" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">외식</span>
+        </div>
+      </div>
+      <div class="vid-card" data-cat="외식">
+        <div class="vid-thumb" data-ig="Dda9R_-hv10">
+          <img src="portfolio/ig_Dda9R_-hv10.jpg" alt="평창한우마을 릴스" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">외식</span>
+        </div>
+      </div>
+      <div class="vid-card" data-cat="외식">
+        <div class="vid-thumb" data-ig="DdTO343hNri">
+          <img src="portfolio/ig_DdTO343hNri.jpg" alt="평창한우마을 릴스" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">외식</span>
+        </div>
+      </div>
+      <div class="vid-card" data-cat="외식">
+        <div class="vid-thumb" data-ig="DdI7utbzt_8">
+          <img src="portfolio/ig_DdI7utbzt_8.jpg" alt="평창한우마을 릴스" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">외식</span>
+        </div>
+      </div>
+      <div class="vid-card" data-cat="외식">
+        <div class="vid-thumb" data-ig="DdBNTsvzZPZ">
+          <img src="portfolio/ig_DdBNTsvzZPZ.jpg" alt="평창한우마을 릴스" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">외식</span>
+        </div>
+      </div>
+      <div class="vid-card" data-cat="외식">
+        <div class="vid-thumb" data-ig="Dc26IQhB4Pz">
+          <img src="portfolio/ig_Dc26IQhB4Pz.jpg" alt="평창한우마을 릴스" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">외식</span>
+        </div>
+      </div>
+      <div class="vid-card" data-cat="외식">
+        <div class="vid-thumb" data-ig="DcvMvt6t4mM">
+          <img src="portfolio/ig_DcvMvt6t4mM.jpg" alt="평창한우마을 릴스" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">외식</span>
+        </div>
+      </div>
       <div class="vid-card" data-cat="전문직">
         <div class="vid-thumb" data-id="HFPqw5A67eo">
           <img src="https://img.youtube.com/vi/HFPqw5A67eo/hqdefault.jpg" alt="전문직 숏폼 2" loading="lazy">
@@ -1150,6 +1378,33 @@
         </div>
       </div>
     </div>
+    <div class="vid-long fade-up">
+      <p class="vid-long-label">롱폼</p>
+      <div class="vid-grid vid-grid--long">
+      <div class="vid-card" data-cat="전문직">
+        <div class="vid-thumb vid-thumb--wide" data-id="9rvSlMiQm2Q">
+          <img src="https://img.youtube.com/vi/9rvSlMiQm2Q/hqdefault.jpg" alt="건축사 롱폼" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">전문직 · 롱폼</span>
+        </div>
+      </div>
+      <div class="vid-card" data-cat="전문직">
+        <div class="vid-thumb vid-thumb--wide" data-id="lBAsGkE7EFw">
+          <img src="https://img.youtube.com/vi/lBAsGkE7EFw/hqdefault.jpg" alt="건축사 롱폼" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">전문직 · 롱폼</span>
+        </div>
+      </div>
+      <div class="vid-card" data-cat="전문직">
+        <div class="vid-thumb vid-thumb--wide" data-id="NKowLoVVc2s">
+          <img src="https://img.youtube.com/vi/NKowLoVVc2s/hqdefault.jpg" alt="건축사 롱폼" loading="lazy">
+          <div class="vid-overlay"><div class="vid-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <span class="vid-cat-label">전문직 · 롱폼</span>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="vid-more-wrap"><a class="vid-more" href="portfolio/">포트폴리오 전체 보기 →</a></div>
   </div>
 </section>
 
@@ -1210,8 +1465,8 @@
       <div class="diff-item fade-up">
         <div class="diff-num">01</div>
         <div class="diff-body">
-          <h3>기획부터 다릅니다</h3>
-          <p>알고리즘 분석 기반으로 "터지는 포맷"을 선별합니다. 단순 편집이 아닌 후킹 → 전개 → CTA 구조를 설계해 조회수가 살아나는 영상을 만듭니다.</p>
+          <h3>마케팅 11년차 대표·이사가 직접 기획합니다</h3>
+          <p>기획은 외주로 넘기지 않습니다. 마케팅 11년차 대표와 이사가 직접 알고리즘을 분석해 "터지는 포맷"을 선별합니다. 단순 편집이 아닌 후킹 → 전개 → CTA 구조를 설계해 조회수가 살아나는 영상을 만듭니다.</p>
         </div>
       </div>
       <div class="diff-item fade-up" style="transition-delay:.1s">
@@ -1226,6 +1481,13 @@
         <div class="diff-body">
           <h3>데이터로 운영합니다</h3>
           <p>매주 조회수 · 저장수 · 팔로워 리포트를 제공합니다. 잘 되는 콘텐츠 타입을 분석해 다음 달 전략에 반영하는 선순환 구조입니다.</p>
+        </div>
+      </div>
+      <div class="diff-item fade-up" style="transition-delay:.3s">
+        <div class="diff-num">04</div>
+        <div class="diff-body">
+          <h3>내부 감독·PD가 직접 촬영하고 편집합니다</h3>
+          <p>자체 감독과 PD가 회사 보유 촬영장비로 현장에 직접 나가 촬영하고, 편집까지 내부에서 끝냅니다. 외주 없이 한 팀이 처음부터 끝까지 책임집니다.</p>
         </div>
       </div>
     </div>
@@ -1261,7 +1523,7 @@
       <div class="service-card fade-up" style="transition-delay:.06s">
         <div class="s-icon">🎬</div>
         <h4>촬영</h4>
-        <p>현장 직접 촬영 또는 고객 소스 수령. 별도 장비 불필요</p>
+        <p>내부 감독·PD가 자체 장비로 현장 직접 촬영. 고객 소스 편집도 가능</p>
       </div>
       <div class="service-card fade-up" style="transition-delay:.12s">
         <div class="s-icon">✂️</div>
@@ -1327,7 +1589,7 @@
         <div class="pricing-card fade-up">
           <h3>숏폼 단건</h3>
           <p class="p-includes">릴스 · 쇼츠 · 유튜브 중 선택<br>기획 + 편집 + 업로드 포함</p>
-          <div><span class="p-price">25</span><span class="p-unit">만원 / 1편</span></div>
+          <div><span class="p-price">30</span><span class="p-unit">만원 / 1편</span></div>
           <p class="p-note">필요할 때 단건으로 주문 가능</p>
           <ul class="p-features">
             <li>후킹 스크립트 기획</li>
@@ -1340,8 +1602,8 @@
           <div class="pricing-badge">🔥 가장 인기</div>
           <h3>숏폼 10편 패키지</h3>
           <p class="p-includes">한 달 꾸준한 업로드를 위한<br>월 운영 패키지</p>
-          <div><span class="p-price">200</span><span class="p-unit">만원 / 10편</span></div>
-          <p class="p-note">편당 20만원 — 단건 대비 20% 절약</p>
+          <div><span class="p-price">250</span><span class="p-unit">만원 / 10편</span></div>
+          <p class="p-note">편당 25만원 — 단건 대비 50만원 절약</p>
           <ul class="p-features">
             <li>월 콘텐츠 캘린더 기획</li>
             <li>후킹 스크립트 10편</li>
@@ -1396,7 +1658,7 @@
     <div class="faq-list" style="margin-top:48px">
       <div class="faq-item fade-up">
         <div class="faq-q">촬영 장비는 직접 준비해야 하나요? <span class="faq-icon">+</span></div>
-        <div class="faq-a">아닙니다. 플로우 미디어가 전문 장비를 지참해 현장 촬영을 진행합니다. 고객사에서 보유한 영상 소스가 있다면 그것을 활용해도 됩니다.</div>
+        <div class="faq-a">아닙니다. 플로우 미디어 내부 감독과 PD가 자체 보유한 촬영장비를 지참해 현장에서 직접 촬영하고 편집합니다. 고객사에서 보유한 영상 소스가 있다면 그것을 활용해도 됩니다.</div>
       </div>
       <div class="faq-item fade-up" style="transition-delay:.04s">
         <div class="faq-q">우리 업종이 숏폼에 맞는지 모르겠어요 <span class="faq-icon">+</span></div>
@@ -1442,6 +1704,7 @@
         <li><a href="#service">서비스 구성</a></li>
         <li><a href="#process">진행 방식</a></li>
         <li><a href="#portfolio">포트폴리오</a></li>
+        <li><a href="knowhow/">노하우</a></li>
       </ul>
     </div>
     <div class="f-col">
@@ -1651,55 +1914,7 @@ void main(void) {
   })();
 
 
-  /* ── 포트폴리오 비디오 ── */
-  (function initVidPortfolio() {
-    // 초기: 전체 보기일 때 Drive 카드 숨김
-    document.querySelectorAll('.vid-card[data-drive="true"]').forEach(c => c.style.display = 'none');
-
-    // 카테고리 필터
-    document.querySelectorAll('.vid-filter').forEach(btn => {
-      btn.addEventListener('click', () => {
-        // 재생 중인 영상 모두 중지
-        document.querySelectorAll('.vid-thumb.playing').forEach(p => {
-          p.classList.remove('playing');
-          const f = p.querySelector('iframe');
-          if (f) f.remove();
-        });
-        document.querySelectorAll('.vid-filter').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        document.querySelectorAll('.vid-card').forEach(card => {
-          const catMatch = filter === 'all' || card.dataset.cat === filter;
-          const driveHidden = filter === 'all' && card.dataset.drive === 'true';
-          card.style.display = (catMatch && !driveHidden) ? '' : 'none';
-        });
-      });
-    });
-
-    // 클릭 자동재생
-    document.querySelectorAll('.vid-thumb').forEach(thumb => {
-      thumb.addEventListener('click', function () {
-        if (this.classList.contains('playing')) return;
-        // 다른 재생 중 영상 중지
-        document.querySelectorAll('.vid-thumb.playing').forEach(p => {
-          p.classList.remove('playing');
-          const f = p.querySelector('iframe');
-          if (f) f.remove();
-        });
-        const iframe = document.createElement('iframe');
-        if (this.dataset.driveSrc) {
-          iframe.src = this.dataset.driveSrc;
-          iframe.allow = 'autoplay; fullscreen';
-        } else {
-          iframe.src = `https://www.youtube.com/embed/${this.dataset.id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
-          iframe.allow = 'autoplay; fullscreen; encrypted-media; picture-in-picture';
-        }
-        iframe.allowFullscreen = true;
-        this.appendChild(iframe);
-        this.classList.add('playing');
-      });
-    });
-  })();
 </script>
+<script src="js/portfolio.js"></script>
 </body>
 </html>

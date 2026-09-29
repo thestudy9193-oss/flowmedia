@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- 영상 목록은 메인 index.html 의 #portfolio 섹션이 단일 출처. 이 페이지는 그걸 불러와 전체를 보여준다. -->
+  <base href="../">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18251102994"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-18251102994');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>포트폴리오 | 플로우미디어 숏폼대행 · 릴스대행 · 쇼츠대행 · 유튜브대행</title>
+  <meta name="description" content="플로우미디어가 직접 기획·촬영·편집한 숏폼·릴스·쇼츠·유튜브 영상 포트폴리오 전체 보기.">
+  <link rel="canonical" href="https://flowmedia-three.vercel.app/portfolio/">
+  <link rel="icon" href="로고 엠블럼.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="포트폴리오 | 플로우미디어">
+  <meta property="og:description" content="직접 기획·촬영·편집한 숏폼·릴스·쇼츠·유튜브 영상 포트폴리오">
+  <meta property="og:image" content="https://flowmedia-three.vercel.app/링크 공유용 배너.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    body { background: #111; color: #f0f0f0; margin: 0; font-family: 'Inter', sans-serif; }
+    #pf-loading { padding: 160px 24px; text-align: center; color: #808080; }
+    #pf-root #portfolio { padding-top: 120px; }
+    .pf-back { display: inline-block; margin-bottom: 20px; color: #a0a0a0; font-size: 14px; text-decoration: none; }
+    .pf-back:hover { color: #f0f0f0; }
+  </style>
+</head>
+<body>
+<div id="pf-root"><p id="pf-loading">포트폴리오 불러오는 중… <a href="./#portfolio" style="color:#beff0f">메인에서 보기</a></p></div>
+<script>
+(async function () {
+  const root = document.getElementById('pf-root');
+  try {
+    const res = await fetch('index.html', { cache: 'no-cache' });
+    const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
+    doc.querySelectorAll('head style').forEach(st => document.head.appendChild(st.cloneNode(true)));
+    const nav = doc.querySelector('nav');
+    const sec = doc.getElementById('portfolio');
+    const footer = doc.querySelector('footer');
+    sec.querySelector('.vid-more-wrap')?.remove();
+    sec.querySelectorAll('.fade-up').forEach(el => el.classList.remove('fade-up'));
+    const title = sec.querySelector('.sec-title');
+    if (title) {
+      title.textContent = '포트폴리오 전체 보기';
+      const back = document.createElement('a');
+      back.className = 'pf-back'; back.href = './'; back.textContent = '← 메인으로';
+      sec.querySelector('.eyebrow')?.before(back);
+    }
+    root.innerHTML = '';
+    [nav, sec, footer].forEach(el => el && root.appendChild(document.importNode(el, true)));
+    const s = document.createElement('script');
+    s.src = 'js/portfolio.js';
+    document.body.appendChild(s);
+  } catch (e) {
+    location.href = './#portfolio';
+  }
+})();
+</script>
+</body>
+</html>
