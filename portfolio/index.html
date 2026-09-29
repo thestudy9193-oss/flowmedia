@@ -34,7 +34,8 @@
   try {
     const res = await fetch('index.html', { cache: 'no-cache' });
     const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
-    doc.querySelectorAll('head style').forEach(st => document.head.appendChild(st.cloneNode(true)));
+    // head 의 <noscript><img>(Meta 픽셀) 때문에 파서가 head 를 일찍 닫아 <style> 이 body 로 밀린다 → 문서 전체에서 찾는다
+    doc.querySelectorAll('style').forEach(st => document.head.appendChild(st.cloneNode(true)));
     const nav = doc.querySelector('nav');
     const sec = doc.getElementById('portfolio');
     const footer = doc.querySelector('footer');
