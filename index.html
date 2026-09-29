@@ -547,8 +547,9 @@
       color: var(--charcoal); font-size: 13px; font-weight: 600;
       font-family: var(--ff-b); cursor: pointer; transition: all .15s;
     }
-    .vid-filter.active, .vid-filter:hover {
-      background: var(--ink); color: var(--on-dark); border-color: var(--ink);
+    .vid-filter:hover { color: var(--ink); border-color: var(--hairline-s); }
+    .vid-filter.active, .vid-filter.active:hover {
+      background: var(--primary); color: var(--on-primary); border-color: var(--primary);
     }
     .vid-grid {
       display: grid;
@@ -1206,7 +1207,7 @@
     <h2 class="sec-title fade-up">직접 확인해보세요</h2>
     <p class="sec-sub fade-up">카테고리를 선택하고 영상을 클릭하면 바로 재생됩니다.</p>
     <div class="vid-filters fade-up">
-      <button class="vid-filter active" data-filter="all" style="color:#000">전체</button>
+      <button class="vid-filter active" data-filter="all">전체</button>
       <button class="vid-filter" data-filter="전문직">전문직</button>
       <button class="vid-filter" data-filter="뷰티">뷰티</button>
       <button class="vid-filter" data-filter="반려동물">반려동물</button>
