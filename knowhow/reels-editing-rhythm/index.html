@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18251102994"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-18251102994');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>릴스 조회수를 살리는 편집 리듬 만드는 법 | 플로우미디어 노하우</title>
+  <meta name="description" content="릴스대행 현장에서 쓰는 편집 리듬 노하우. 컷 길이 정하는 기준, BGM 비트에 컷 맞추기, 정적 구간 없애는 방법까지 편집 PD의 시선으로 정리했습니다.">
+  <link rel="canonical" href="https://flowmedia-three.vercel.app/knowhow/reels-editing-rhythm/">
+  <link rel="icon" href="../../로고 엠블럼.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="릴스 조회수를 살리는 편집 리듬 만드는 법 | 플로우미디어 노하우">
+  <meta property="og:description" content="릴스대행 현장에서 쓰는 편집 리듬 노하우. 컷 길이 정하는 기준, BGM 비트에 컷 맞추기, 정적 구간 없애는 방법까지 편집 PD의 시선으로 정리했습니다.">
+  <meta property="og:url" content="https://flowmedia-three.vercel.app/knowhow/reels-editing-rhythm/">
+  <meta property="og:image" content="https://flowmedia-three.vercel.app/knowhow/images/reels-editing-rhythm.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"릴스 조회수를 살리는 편집 리듬 만드는 법","description":"릴스대행 현장에서 쓰는 편집 리듬 노하우. 컷 길이 정하는 기준, BGM 비트에 컷 맞추기, 정적 구간 없애는 방법까지 편집 PD의 시선으로 정리했습니다.","datePublished":"2026-10-01","image":"https://flowmedia-three.vercel.app/knowhow/images/reels-editing-rhythm.jpg","author":{"@type":"Organization","name":"플로우미디어"},"publisher":{"@type":"Organization","name":"플로우미디어"},"mainEntityOfPage":"https://flowmedia-three.vercel.app/knowhow/reels-editing-rhythm/"}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--canvas:#111;--bone:#181818;--card:#222;--primary:#beff0f;--primary-deep:#9dcc00;--on-primary:#0a0a0a;
+--ink:#f0f0f0;--body-c:#c0c0c0;--charcoal:#a0a0a0;--mute:#808080;--hairline:rgba(255,255,255,.1);
+--ff-d:'Bricolage Grotesque',sans-serif;--ff-b:'Inter','Pretendard',-apple-system,sans-serif;--r-full:9999px;--r-md:10px;--r-lg:16px}
+body{background:var(--canvas);color:var(--ink);font-family:var(--ff-b);line-height:1.6;overflow-x:hidden}
+a{color:inherit}
+nav{position:sticky;top:0;z-index:100;height:60px;display:flex;align-items:center;justify-content:space-between;
+padding:0 40px;background:var(--canvas);border-bottom:1px solid var(--hairline)}
+.logo{font-family:var(--ff-d);font-size:20px;font-weight:700;letter-spacing:-.5px;text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo em{font-style:normal;color:var(--primary)}
+.logo img{height:28px;width:28px;object-fit:cover;border-radius:4px}
+nav ul{list-style:none;display:flex;gap:28px}
+nav ul a{text-decoration:none;color:var(--charcoal);font-size:14px;font-weight:600}
+nav ul a:hover,nav ul a.on{color:var(--ink)}
+.nav-cta{background:var(--primary);color:var(--on-primary);padding:8px 20px;border-radius:var(--r-full);font-size:14px;font-weight:600;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:72px 24px 96px}
+.eyebrow{color:var(--primary);font-size:13px;font-weight:700;letter-spacing:.5px;margin-bottom:12px}
+h1.page{font-family:var(--ff-d);font-size:clamp(30px,5vw,48px);font-weight:700;letter-spacing:-1px;line-height:1.2}
+.sub{color:var(--charcoal);margin-top:12px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+.card{display:flex;flex-direction:column;background:var(--bone);border:1px solid var(--hairline);border-radius:var(--r-lg);
+overflow:hidden;text-decoration:none;transition:transform .25s,border-color .25s}
+.card:hover{transform:translateY(-4px);border-color:rgba(190,255,15,.4)}
+.card .thumb{aspect-ratio:16/9;background:linear-gradient(140deg,#1f2a05,#0a0a0a);display:flex;align-items:center;justify-content:center;
+font-family:var(--ff-d);font-size:28px;font-weight:700;color:var(--primary)}
+.card .thumb img{width:100%;height:100%;object-fit:cover}
+.card .body{padding:20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.tag{display:inline-block;align-self:flex-start;background:rgba(190,255,15,.12);color:var(--primary);font-size:11px;font-weight:700;
+padding:3px 10px;border-radius:var(--r-full)}
+.card h2{font-size:18px;line-height:1.4;font-weight:700}
+.card p{color:var(--charcoal);font-size:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.meta{color:var(--mute);font-size:13px}
+.empty{margin-top:48px;color:var(--mute)}
+article{max-width:720px;margin:0 auto}
+article .meta{margin-top:16px}
+figure.hero{margin:32px 0 0}figure.hero img{width:100%;height:auto;display:block;border-radius:var(--r-lg);aspect-ratio:16/9;object-fit:cover}
+.post{margin-top:40px;color:var(--body-c);font-size:17px;line-height:1.85;word-break:keep-all}
+.post h2{color:var(--ink);font-size:24px;line-height:1.4;margin:48px 0 16px}
+.post h3{color:var(--ink);font-size:20px;margin:36px 0 12px}
+.post h4{color:var(--ink);font-size:17px;margin:28px 0 10px}
+.post p{margin:0 0 20px}
+.post ul,.post ol{margin:0 0 20px;padding-left:22px}
+.post li{margin-bottom:8px}
+.post strong{color:var(--ink)}
+.post a{color:var(--primary)}
+.post blockquote{border-left:3px solid var(--primary);padding:4px 0 4px 18px;margin:0 0 20px;color:var(--ink)}
+.post figure{margin:28px 0}
+.post img{max-width:100%;border-radius:var(--r-md);display:block}
+.post hr{border:none;border-top:1px solid var(--hairline);margin:40px 0}
+.post code{background:var(--card);padding:2px 6px;border-radius:4px;font-size:.9em}
+.cta{margin-top:64px;padding:32px;border-radius:var(--r-lg);background:var(--bone);border:1px solid var(--hairline);text-align:center}
+.cta h3{font-size:20px;margin-bottom:8px}
+.cta p{color:var(--charcoal);margin-bottom:20px}
+.cta a{display:inline-block;background:var(--primary);color:var(--on-primary);padding:12px 28px;border-radius:var(--r-full);font-weight:700;text-decoration:none}
+.back{display:inline-block;margin-top:40px;color:var(--charcoal);text-decoration:none;font-size:14px}
+footer{border-top:1px solid var(--hairline);padding:32px 24px;text-align:center;color:var(--mute);font-size:13px}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){nav{padding:0 16px}nav ul{display:none}.wrap{padding:48px 16px 72px}.grid{grid-template-columns:1fr}.post{font-size:16px}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="../../"><img src="../../로고 엠블럼.png" alt="">플로우<em>미디어</em></a>
+  <ul>
+    <li><a href="../../#service">서비스</a></li>
+    <li><a href="../../#portfolio">포트폴리오</a></li>
+    <li><a href="../../#pricing">요금제</a></li>
+    <li><a href="../../knowhow/" class="on">노하우</a></li>
+  </ul>
+  <a href="https://open.kakao.com/me/flowmedia" target="_blank" class="nav-cta">무료 상담</a>
+</nav>
+<main class="wrap">
+  <article>
+    <p class="eyebrow">편집</p>
+    <h1 class="page">릴스 조회수를 살리는 편집 리듬 만드는 법</h1>
+    <p class="meta">2026.10.01 · 플로우미디어</p>
+    <figure class="hero"><img src="../images/reels-editing-rhythm.jpg" alt="릴스 조회수를 살리는 편집 리듬 만드는 법" width="1280" height="720"></figure>
+    <div class="post">
+<p>같은 촬영본이라도 어떻게 자르고 붙이느냐에 따라 끝까지 보는 영상이 되기도 하고, 2초 만에 넘겨지는 영상이 되기도 합니다. 플로우미디어가 릴스대행을 진행하면서 가장 많이 다듬는 부분도 촬영보다 <strong>편집 리듬</strong>입니다.</p>
+<p>리듬이란 결국 시청자가 "다음 장면이 궁금하다"고 느끼는 속도입니다. 오늘은 저희 내부 PD가 편집 단계에서 실제로 점검하는 기준을 정리해 드립니다.</p>
+<h2>1. 컷 길이는 '정보량'으로 정하기</h2>
+<p>"컷은 무조건 짧게"라는 말을 많이 들으셨을 텐데, 모든 컷을 똑같이 짧게 자르면 오히려 정신없고 내용이 머리에 남지 않습니다. 기준은 초 단위가 아니라 <strong>그 컷이 전달하는 정보량</strong>입니다.</p>
+<ul><li>분위기·전환 컷: 짧게 끊어서 속도감을 줍니다</li><li>설명이 담긴 컷: 자막을 다 읽을 수 있을 만큼 여유를 줍니다</li><li>결과·핵심 장면: 시청자가 "아" 하고 느낄 때까지 조금 더 머뭅니다</li></ul>
+<p>편집을 마친 뒤 소리를 끄고 한 번 더 보세요. 자막을 다 읽기 전에 장면이 넘어간다면 그 컷은 너무 짧은 것입니다.</p>
+<h2>2. BGM 비트에 컷을 맞추기</h2>
+<p>릴스는 음악과 함께 소비되는 포맷입니다. 컷 전환이 음악 박자와 어긋나면 시청자는 이유를 몰라도 어색함을 느낍니다.</p>
+<ol><li>편집 전에 BGM부터 고르고 타임라인에 먼저 깔아둡니다</li><li>킥이나 스네어처럼 강한 박자 위치에 마커를 찍습니다</li><li>주요 컷 전환을 마커 위치에 맞춥니다</li><li>모든 박자에 맞출 필요는 없고, <strong>장면이 크게 바뀌는 순간</strong>만 맞춰도 충분합니다</li></ol>
+<blockquote>음악이 고조되는 구간에 가장 보여주고 싶은 장면을 배치하면, 별다른 효과 없이도 영상이 살아납니다.</blockquote>
+<h2>3. 정적 구간을 찾아서 없애기</h2>
+<p>조회수를 떨어뜨리는 가장 흔한 원인은 <strong>아무 일도 일어나지 않는 구간</strong>입니다. 말과 말 사이의 숨소리, "음…" 하고 생각하는 순간, 같은 앵글이 오래 이어지는 장면이 대표적입니다.</p>
+<ul><li>말 사이 공백은 과감하게 잘라 호흡을 붙입니다</li><li>한 앵글이 길어지면 살짝 줌인하거나 인서트 컷을 끼웁니다</li><li>설명이 길어지는 부분은 화면에 자막 키워드나 그래픽을 더해 변화를 줍니다</li></ul>
+<p>화면이든 소리든 자막이든, 몇 초마다 <strong>무언가 하나는 바뀌고 있어야</strong> 시청자의 손가락이 멈춰 있습니다.</p>
+<h2>4. 리듬에도 강약이 필요하다</h2>
+<p>처음부터 끝까지 빠르기만 한 영상은 금방 피로해집니다. 오프닝은 빠르게 치고 들어가고, 핵심 정보에서는 한 박자 쉬어 주고, 마지막에는 다시 속도를 올려 마무리하는 식으로 <strong>완급을 설계</strong>해야 합니다. 저희는 편집 전에 구간별로 빠름·보통·느림을 먼저 정해두고 작업합니다.</p>
+<h2>5. 자막 등장 타이밍도 리듬이다</h2>
+<p>자막이 한꺼번에 뜨면 시청자는 읽느라 화면을 놓치고, 너무 늦게 뜨면 말과 어긋나 답답해집니다.</p>
+<ul><li>자막은 말이 시작되는 순간에 맞춰 등장시킵니다</li><li>한 화면에 한 문장만 띄우고, 다음 문장으로 넘어갈 때 컷 전환과 함께 바꿉니다</li><li>강조 단어는 박자에 맞춰 크기나 색을 살짝 바꾸면 리듬감이 더해집니다</li></ul>
+<h2>6. 촬영 단계에서 편집 소스를 챙기기</h2>
+<p>좋은 리듬은 편집실에서만 만들어지지 않습니다. 인서트용 손 동작, 제품 클로즈업, 다른 각도의 컷이 충분해야 편집에서 끊고 이을 선택지가 생깁니다. 플로우미디어는 기획부터 촬영, 편집까지 같은 팀이 맡기 때문에 촬영 현장에서부터 <strong>편집에 쓸 컷을 계산하며</strong> 찍습니다.</p>
+<hr>
+<h2>정리</h2>
+<ol><li>컷 길이는 초가 아니라 정보량으로</li><li>장면이 크게 바뀌는 순간을 BGM 박자에 맞추기</li><li>아무 일도 없는 정적 구간은 과감히 삭제</li><li>빠름과 느림의 완급 설계</li><li>말과 박자에 맞춘 자막 타이밍</li><li>촬영 단계부터 편집 소스 확보</li></ol>
+<p>편집 리듬은 한 번 기준이 잡히면 채널 전체의 완성도가 달라집니다. 릴스대행 업체를 비교하고 계신다면, 결과물을 소리 끄고 한 번, 켜고 한 번 보면서 <strong>리듬이 살아 있는지</strong> 확인해 보세요.</p>
+    </div>
+    <div class="cta">
+      <h3>우리 브랜드도 숏폼으로 키워볼까요?</h3>
+      <p>기획부터 촬영·편집·업로드까지 한 팀이 책임집니다.</p>
+      <a href="https://open.kakao.com/me/flowmedia" target="_blank">무료 상담 받기</a>
+    </div>
+    <a class="back" href="../">← 노하우 목록</a>
+  </article>
+</main>
+<footer>© 플로우미디어 · 릴스 · 쇼츠 · 유튜브 숏폼 영상 전문 대행사</footer>
+</body>
+</html>
