@@ -1,7 +1,7 @@
 # 노하우 (칼럼) 운영 가이드
 
 홈페이지 `/knowhow/` 탭. 숏폼대행·릴스대행·쇼츠대행·유튜브대행 검색 유입용 영상 제작 꿀팁 글.
-**월 15편 · 2일에 1편 예약 발행.**
+**2일에 1편 예약 발행.** (1차: 2026-09-29 ~ 11-06, 20편)
 
 ## 글 쓰는 법
 
@@ -13,12 +13,14 @@
    description: 검색 결과에 보일 요약 1~2문장 (메인 키워드 포함)
    date: 2026-11-01
    category: 영상 기획 | 촬영 | 편집 | 운영 | 대행 가이드
-   thumbnail: (선택) 이미지 경로
+   image: (선택) knowhow/images/ 안의 파일명. 생략하면 <slug>.jpg
    draft: (선택) true 면 공개 안 함
    ---
    ```
 3. 본문 마크다운: `##` 소제목, `-`/`1.` 목록, `>` 인용, `**굵게**`, `[링크](url)`, `![설명](이미지)`, `---`.
-4. `python3 tools/build_knowhow.py` → HTML 생성 확인 → 커밋·푸시.
+4. 대표 이미지 1장(16:9, 글자 없음): `knowhow/images/<slug>.jpg`. 새 글이면 `knowhow/gen_images.sh` 의 `prompt_for` 에 장면 한 줄을 추가하고 `bash knowhow/gen_images.sh <slug>` (codex-image gen.sh 경유).
+   글 상단 대표 이미지 + 목록 썸네일 + 공유 미리보기(og:image)에 같이 쓰인다.
+5. `python3 tools/build_knowhow.py` → HTML 생성 확인 → 커밋·푸시.
 
 ## 예약 발행 구조
 

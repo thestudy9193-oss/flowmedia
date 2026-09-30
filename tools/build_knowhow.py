@@ -33,6 +33,9 @@ def parse_post(path):
     meta.setdefault("category", "노하우")
     meta.setdefault("description", "")
     meta["slug"] = slug
+    # 대표 이미지: frontmatter image(파일명) → 없으면 knowhow/images/<slug>.jpg
+    img = meta.get("image") or meta.get("thumbnail") or f"{slug}.jpg"
+    meta["image"] = img if (OUT / "images" / img).exists() else ""
     meta["draft"] = meta.get("draft", "").lower() == "true"
     meta["html"] = md_to_html(body)
     if not meta["description"]:
@@ -127,6 +130,7 @@ padding:3px 10px;border-radius:var(--r-full)}
 .empty{margin-top:48px;color:var(--mute)}
 article{max-width:720px;margin:0 auto}
 article .meta{margin-top:16px}
+figure.hero{margin:32px 0 0}figure.hero img{width:100%;height:auto;display:block;border-radius:var(--r-lg);aspect-ratio:16/9;object-fit:cover}
 .post{margin-top:40px;color:var(--body-c);font-size:17px;line-height:1.85;word-break:keep-all}
 .post h2{color:var(--ink);font-size:24px;line-height:1.4;margin:48px 0 16px}
 .post h3{color:var(--ink);font-size:20px;margin:36px 0 12px}
@@ -152,7 +156,7 @@ footer{border-top:1px solid var(--hairline);padding:32px 24px;text-align:center;
 """
 
 
-def page(title, desc, canonical, body, extra_head="", depth=1):
+def page(title, desc, canonical, body, extra_head="", depth=1, og_image=None):
     up = "../" * depth
     return f"""<!DOCTYPE html>
 <html lang="ko">
@@ -169,7 +173,7 @@ def page(title, desc, canonical, body, extra_head="", depth=1):
   <meta property="og:title" content="{html.escape(title)}">
   <meta property="og:description" content="{html.escape(desc)}">
   <meta property="og:url" content="{canonical}">
-  <meta property="og:image" content="{SITE}/링크 공유용 배너.png">
+  <meta property="og:image" content="{og_image or SITE + '/링크 공유용 배너.png'}">
   <meta name="twitter:card" content="summary_large_image">
   {extra_head}
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -215,15 +219,19 @@ def build():
         d.mkdir(parents=True, exist_ok=True)
         live.add(p["slug"])
         url = f"{SITE}/knowhow/{p['slug']}/"
+        img_abs = f"{SITE}/knowhow/images/{p['image']}" if p["image"] else None
+        hero = (f'<figure class="hero"><img src="../images/{html.escape(p["image"])}" alt="{html.escape(p["title"])}" '
+                f'width="1280" height="720"></figure>') if p["image"] else ""
         ld = ('<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article",'
               f'"headline":{json_str(p["title"])},"description":{json_str(p["description"])},'
-              f'"datePublished":"{p["date"]}","author":{{"@type":"Organization","name":"플로우미디어"}},'
+              f'"datePublished":"{p["date"]}",' + (f'"image":"{img_abs}",' if img_abs else "") + f'"author":{{"@type":"Organization","name":"플로우미디어"}},'
               f'"publisher":{{"@type":"Organization","name":"플로우미디어"}},"mainEntityOfPage":"{url}"}}</script>')
         body = f"""<main class="wrap">
   <article>
     <p class="eyebrow">{html.escape(p['category'])}</p>
     <h1 class="page">{html.escape(p['title'])}</h1>
     <p class="meta">{fmt_date(p['date'])} · 플로우미디어</p>
+    {hero}
     <div class="post">
 {p['html']}
     </div>
@@ -236,18 +244,18 @@ def build():
   </article>
 </main>"""
         (d / "index.html").write_text(
-            page(f"{p['title']} | 플로우미디어 노하우", p["description"], url, body, ld, depth=2), encoding="utf-8")
+            page(f"{p['title']} | 플로우미디어 노하우", p["description"], url, body, ld, depth=2, og_image=img_abs), encoding="utf-8")
 
     # 삭제·draft 된 글의 옛 폴더 정리(생성물만: index.html 하나뿐인 폴더)
     for d in OUT.iterdir():
-        if d.is_dir() and d.name != "posts" and d.name not in live:
+        if d.is_dir() and d.name not in ("posts", "images") and d.name not in live:
             files = list(d.iterdir())
             if [f.name for f in files] == ["index.html"]:
                 files[0].unlink(); d.rmdir()
 
     # 목록
     cards = "\n".join(f"""    <a class="card" href="{p['slug']}/">
-      <div class="thumb">{f'<img src="{html.escape(p["thumbnail"])}" alt="" loading="lazy">' if p.get("thumbnail") else "FLOW"}</div>
+      <div class="thumb">{f'<img src="images/{html.escape(p["image"])}" alt="{html.escape(p["title"])}" loading="lazy">' if p["image"] else "FLOW"}</div>
       <div class="body">
         <span class="tag">{html.escape(p['category'])}</span>
         <h2>{html.escape(p['title'])}</h2>
