@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parent.parent
 POSTS = ROOT / "knowhow" / "posts"
 OUT = ROOT / "knowhow"
 SITE = "https://flowmedia-three.vercel.app"
-KAKAO = "https://open.kakao.com/me/flowmedia"
+KAKAO = "https://open.kakao.com/o/sjnvncAi"
 
 
 # ── frontmatter + 최소 마크다운 ─────────────────────────
